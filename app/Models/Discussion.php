@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Discussion extends Model
 {
     use HasFactory;
+    protected $guarded=[];  // To do we will use global model  later 
 }

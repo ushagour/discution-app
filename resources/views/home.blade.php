@@ -3,7 +3,10 @@
 @section('content')
 
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">
+                <a href="{{Route('discussion.create')}}"> <span class="badge badge-primary"> add discution</span></a>
+            
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
