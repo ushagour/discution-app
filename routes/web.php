@@ -19,6 +19,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::resource('discussion',DiscussionController::class);
+Route::resource('discussions',DiscussionController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

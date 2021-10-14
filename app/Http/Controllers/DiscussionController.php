@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Channel;
 use App\Models\Discussion;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateDiscussionRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 class DiscussionController extends Controller
 {
+
+    public function __construct()
+    {
+         $this->middleware('auth')->only('create','store'); 
+        //  how to make middleaware auth only for function create and store
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +25,7 @@ class DiscussionController extends Controller
     public function index()
     {
         //
+    
     }
 
     /**
@@ -37,14 +46,10 @@ class DiscussionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDiscussionRequest $request)
     {
         
-        $validatedata = $request->validate([
-            'title' => 'required|max:255',
-            'content'=>'required',
-            'channel_id'=>'required'
-        ]);
+    
         
         $data=([
             'title'=>$request->title,
@@ -58,8 +63,8 @@ class DiscussionController extends Controller
         Session::flash('toaster-message', 'post created succesfuly!'); 
         Session::flash('toaster-class', 'success'); 
         
-        return redirect()->back();
-        // dd($request);
+       return redirect()->back();
+    //   dd($request);
 
 
   

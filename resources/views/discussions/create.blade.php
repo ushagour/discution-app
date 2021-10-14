@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        <a href="{{Route('discussion.create')}}"> <span class="badge badge-primary"> add discution</span></a>
+        <a href="{{Route('discussions.create')}}"> <span class="badge badge-primary"> add discution</span></a>
 
     </div>
 
@@ -16,14 +16,14 @@
         @endif
 
 
-        <form  action="{{route('discussion.store')}}" method="post">
+        <form  action="{{Route('discussions.store')}}" method="post">
             @csrf
             <div class="form-group">
                 <label for="title">title</label>
                 <input id="title" class="form-control" type="text" name="title">
             </div>
             <div class="form-group">
-                <textarea  class="form-control" name="content" ></textarea>
+                <textarea  class="form-control" name="content"></textarea>
    
             </div>
             <div class="form-group">
