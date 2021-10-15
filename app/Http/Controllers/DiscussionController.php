@@ -25,6 +25,8 @@ class DiscussionController extends Controller
     public function index()
     {
         //
+
+    return view('discussions.index')->with('discussions',Discussion::paginate(5));
     
     }
 
@@ -63,11 +65,10 @@ class DiscussionController extends Controller
         Session::flash('toaster-message', 'post created succesfuly!'); 
         Session::flash('toaster-class', 'success'); 
         
-       return redirect()->back();
+       return redirect()->route('discussions.index');
     //   dd($request);
 
 
-  
     }
 
     /**
