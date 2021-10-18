@@ -11,11 +11,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield("more_css")
@@ -89,22 +89,26 @@
         <main class="container py-4">
             <div class="row">
                 <div class="col-md-4">
-                    <ul class="list-group">
 
-                        @foreach($channels as $channel)
-                        <li class="list-group-item">
-                            <a class="" href="#">{{$channel->name}}</a>
-                        </li>
-                        @endforeach
+                            <a href="{{route('discussions.create')}}" style="width: 100%;"  class="btn  btn-info my-2">create discussions</a>                       
+                            <ul class="list-group">
+
+                                @foreach($channels as $channel)
+                                <li class="list-group-item">
+                                    <a class="" href="#">{{$channel->name}}</a>
+                                </li>
+                                @endforeach
 
 
-                    </ul>
+                            </ul>
+                    </div>
+
+                
+
+                <div class="col-md-8">
+                    @yield('content')
+
                 </div>
-          
-            <div class="col-md-8">
-                @yield('content')
-
-            </div>
             </div>
 
         </main>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateDiscussionRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use Auth;
 class DiscussionController extends Controller
 {
 
@@ -57,7 +58,8 @@ class DiscussionController extends Controller
             'title'=>$request->title,
             'slug' =>str::slug($request->title),
             'content'=>$request->content,
-            'channel_id'=>$request->channel_id
+            'channel_id'=>$request->channel_id,
+            'user_id'=> Auth::id()
         ]);
 
 
@@ -77,9 +79,12 @@ class DiscussionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Discussion $discussion)//Todo 9llb 3la route model bunding
     {
         //
+        // dd($discussion);
+        return view('discussions.show')->with('discussion',$discussion);
+
     }
 
     /**

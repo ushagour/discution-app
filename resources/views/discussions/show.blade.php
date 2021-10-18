@@ -2,8 +2,7 @@
 
 @section('content')
 
-@foreach($discussions as $discussion)
-              <div class="card">
+<div class="card">
                   <div class="card-header">
 
                   <div class="d-flex justify-content-between"> 
@@ -14,18 +13,17 @@
                   <strong>{{$discussion->author->name}}</strong>
                  
                   </div>
-                  <div>
-
-                  <a name="show" id="show" class="btn btn-success" href="{{route('discussions.show',$discussion->slug)}}" role="button">show</a>
-                  </div>
+               
                   </div>
                  
 
                   </div>
                   <div class="card-body">
-                      <p class="card-text">{{$discussion->title}}</p>
+                      <p class="card-text">{{$discussion->content}}</p>
                   </div>
               </div>
-@endforeach
 
+
+
+</div>
 @endsection
