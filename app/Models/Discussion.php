@@ -9,7 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 class Discussion extends ModelsModel
 {
     use HasFactory;
-   // To do we will use global model  later 
 
-   
+
+
+   public function author()
+   {
+
+    return $this->belongsTo(User::class,'user_id'); //we specify the colum if we use defrent function name 
+   }
+   public function getRouteKeyName()//methode overwrite what laravel mothode do!! mohhiim sEWLL3LIIHA 
+   {
+       return 'slug';
+   }
 }
