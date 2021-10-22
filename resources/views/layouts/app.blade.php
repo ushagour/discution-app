@@ -83,8 +83,10 @@
             </div>
         </nav>
 
-
-
+        <!-- in_array  and request()->path()
+        checking if user is visite one of those routes ('login','register','password/reset') dont display the side bare .
+        else show it no problem   -->
+        @if(!in_array(request()->path(),['login','register','password/reset'])) 
         <main class="container py-4">
             <div class="row">
                 <div class="col-md-4">
@@ -117,7 +119,12 @@
             </div>
 
         </main>
+        @else
+        <div class="py-2">
 
+            @yield('content')
+        </div>
+        @endif
     </div>
 </body>
 
