@@ -85,13 +85,18 @@
 
 
 
-        @auth
         <main class="container py-4">
             <div class="row">
                 <div class="col-md-4">
 
-                            <a href="{{route('discussions.create')}}" style="width: 100%;"  class="btn  btn-info my-2">create discussions</a>                       
-                            <ul class="list-group">
+                @auth       
+                <a href="{{route('discussions.create')}}" style="width: 100%;"  class="btn  btn-info my-2">create discussions</a>                       
+
+         @else
+         <a href="{{route('login')}}" style="width: 100%;"  class="btn  btn-info my-2">sing in to create discussions</a>                       
+
+        @endauth                           
+         <ul class="list-group">
 
                                 @foreach($channels as $channel)
                                 <li class="list-group-item">
@@ -112,12 +117,7 @@
             </div>
 
         </main>
-        @else
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-        @endauth
     </div>
 </body>
 

@@ -4,6 +4,7 @@
 
 <div class="card">
     <div class="card-header">
+        
         <a href="{{Route('discussions.create')}}"> <span class="badge badge-primary"> add discution</span></a>
 
     </div>

@@ -11,7 +11,7 @@
  
                   <div>
                   <img height="40px" width="40px" style="border-raduis:50%;" src="{{ Gravatar::src($discussion->author->email) }}">
-                  <strong>{{$discussion->author->name}}</strong>
+                  <span class="ml-2 font-weight-bold">{{$discussion->author->name}}</span>
                  
                   </div>
                   <div>
@@ -26,6 +26,9 @@
                       <p class="card-text">{{$discussion->title}}</p>
                   </div>
               </div>
+
 @endforeach
 
+
+{{$discussions->links()}}
 @endsection
