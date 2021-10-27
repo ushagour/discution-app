@@ -40,7 +40,7 @@ class RepliesController extends Controller
         //had l kitaba below khassni nchoofha 
         auth()->user()->replies()->create([
             'content'=>$request->content,
-            'discussion'=>$discussion->id
+            'discussion_id'=>$discussion->id
 
         ]);
         

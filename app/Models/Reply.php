@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Models;
+use App\Models\Model as ModelsModel;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reply extends Model
+class Reply extends ModelsModel
 {
     use HasFactory;
     public function owner()
