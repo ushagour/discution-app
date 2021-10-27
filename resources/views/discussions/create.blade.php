@@ -5,8 +5,7 @@
 <div class="card">
     <div class="card-header">
         
-        <a href="{{Route('discussions.create')}}"> <span class="badge badge-primary"> add discution</span></a>
-
+<div class="card-title">  Add discussions</div>
     </div>
 
     <div class="card-body">
@@ -24,8 +23,8 @@
                 <input id="title" class="form-control" type="text" name="title">
             </div>
             <div class="form-group">
-                <textarea  class="form-control" name="content"></textarea>
-   
+                <input id="x" type="hidden" name="content">
+  <trix-editor input="x"></trix-editor>
             </div>
             <div class="form-group">
                 <label for="channel">channel</label>
@@ -50,7 +49,4 @@
 @endsection
 
 
-@section('more_css')
-@endsection 
-@section('more_js')
-@endsection 
+<!-- -->
