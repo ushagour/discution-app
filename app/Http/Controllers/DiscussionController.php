@@ -6,6 +6,7 @@ use App\Models\Channel;
 use App\Models\Discussion;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateDiscussionRequest;
+use App\Models\Reply;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Auth;
@@ -119,5 +120,22 @@ class DiscussionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**ali
+     * function make  reply as best relpy 
+     *
+     * @param $discussion 
+     * @param $reply
+     * @return \Illuminate\Http\Response
+     */
+    public function BestReply(Discussion $discussion,Reply $reply)
+    {
+        //
+
+        // echo'ali';
+        $discussion->MarkAsBest($reply); //hena object dyal discussion howa lii feh wahd function Mark s best reply kanssiftoo lih en parametre object reply 
+        return redirect()->back();
+        
     }
 }

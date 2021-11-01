@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\RepliesController;
+use App\Models\Discussion;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +26,5 @@ Route::resource('discussions',DiscussionController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('discussions/{discussion}/replies',RepliesController::class); //todo hta ntell 3la hadii kiifach katkhdm 
+
+Route::POST('discussions/{discussion}/replies/{reply}',[DiscussionController::class,'BestReply'])->name('discussion.best-reply');

@@ -26,4 +26,17 @@ class Discussion extends ModelsModel
        return $this->hasMany(Reply::class);
    }
 
+   public function BestReply()
+       {
+           return $this->belongsTo(Reply::class,'reply_id');
+       }
+   
+
+   public function MarkAsBest($reply) // creation of new function to update best replay for this discussion 
+   {
+       $this->update( [ //hena goolna liih update l this object li khdamin feh  'Discussion' 
+
+           'reply_id' => $reply->id //wgellna liih y bedel le champ dyalo(object) relply_id  b$id dyal replay jdid  li mssift on parametre 
+       ]); 
+   }
 }

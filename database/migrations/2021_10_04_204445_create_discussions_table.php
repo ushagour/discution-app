@@ -19,6 +19,7 @@ class CreateDiscussionsTable extends Migration
             $table->string("slug");
             $table->text("content");
             $table->integer("channel_id");
+            $table->integer("reply_id")->nullable();// hitt momkiin ykoon chii discussion ma3ndhach reply 
             $table->integer("user_id");
             $table->timestamps();
         });
