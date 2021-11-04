@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateReplyRequest;
 use App\Models\Discussion;
+use App\Notifications\NewReplyAdded;
 use Illuminate\Http\Request;
 
 class RepliesController extends Controller
@@ -43,7 +44,9 @@ class RepliesController extends Controller
             'discussion_id'=>$discussion->id
 
         ]);
-        
+
+        $discussion->author->notify( New NewReplyAdded($discussion)); //melii y tcriya chii replya nsiifto msg l autor dyal discussion 
+
       return  redirect()->back();
         
     
