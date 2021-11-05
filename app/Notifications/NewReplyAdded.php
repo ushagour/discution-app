@@ -33,7 +33,7 @@ class NewReplyAdded extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -58,8 +58,9 @@ class NewReplyAdded extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
+        return [ 
+            //had data lii ghatmchii l data base blasst dak chmap data 
+            'discussion'=>$this->discussion //hena ghanssiftoi object dyal dicussion kaml ytstooka 3la chakl jasen f data base 
         ];
     }
 }
