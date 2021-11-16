@@ -54,7 +54,7 @@
     
                     </li>
                     @endauth
-
+                    <li class="nav-item"><a href="{{route('discussions.index')}}" class="nav-link">Discussion</a></li>
 
                     </ul>
 
