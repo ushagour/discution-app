@@ -39,4 +39,27 @@ class Discussion extends ModelsModel
            'reply_id' => $reply->id //wgellna liih y bedel le champ dyalo(object) relply_id  b$id dyal replay jdid  li mssift on parametre 
        ]); 
    }
+
+
+        /*  filters function with query builder
+                scope functions in model
+            */
+
+   public   function scopeFilterByChannels($builder)
+   {
+
+            if (request()->query('channel')) {
+                # code...
+
+                $channel = Channel::where('slug', request()->query('channel'))->first();
+                        
+                        if ($channel) {
+                        
+                            return $builder->where('channel_id',$channel->id);
+                        }
+            return $builder;
+
+            }
+            return $builder;
+   }
 }

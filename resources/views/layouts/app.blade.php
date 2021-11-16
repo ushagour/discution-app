@@ -116,7 +116,7 @@
 
                                 @foreach($channels as $channel)
                                 <li class="list-group-item">
-                                    <a class="" href="#">{{$channel->name}}</a>
+                                   <a class="link" href="{{route('discussions.index')}}?channel={{$channel->slug}}">{{$channel->name}}</a>   <!-- route discussion.index dosnt have any parametres we have to pass it using ? url  getparams  -->
                                 </li>
                                 @endforeach
 
