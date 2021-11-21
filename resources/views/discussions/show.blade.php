@@ -19,26 +19,29 @@
     </div>
     @if($discussion->BestReply)
 
-    <div class="card text-white bg-success">
-     <div class="card-header d-flex justify-content-between">  <!-- les element li fwsst had div ghaykoon wahd esspac biinathom  -->
-<div>   <img height="40px" width="40px" style="border-raduis:50%;" src="{{Gravatar::src( $discussion->BestReply->owner->email)}}" alt="">   <!--  discussion->(bestreply)reply->(owner)user ->email -->
-          <strong>{{$discussion->BestReply->owner->name}}</strong></div>
-      <div>
-          <strong>
-              BEST REPLY
-          </strong>
-      </div>
-          </div>
+    <div class="card text-white bg-success m-3">
+        <div class="card-header d-flex justify-content-between">
+            <!-- les element li fwsst had div ghaykoon wahd esspac biinathom  -->
+            <div> <img height="40px" width="40px" style="border-raduis:50%;"
+                    src="{{Gravatar::src( $discussion->BestReply->owner->email)}}" alt="">
+                <!--  discussion->(bestreply)reply->(owner)user ->email -->
+                <strong>{{$discussion->BestReply->owner->name}}</strong></div>
+            <div>
+                <strong>
+                    BEST REPLY
+                </strong>
+            </div>
+        </div>
 
-          <div class="card-body">
+        <div class="card-body">
             <p class="card-text">{!!$discussion->BestReply->content!!}</p>
         </div>
     </div>
     @endif
 </div>
 <br>
-@foreach($discussion->replies()->paginate(3) as $reply)
-<div class="card">
+@foreach($discussion->replies as $reply)
+<div class="card my-2 ">
     <div class="card-header d-flex justify-content-between">
 
         <div>
@@ -46,7 +49,7 @@
             <strong>{{$reply->owner->name}}</strong>
 
         </div>
-        <div
+        <div>
             @if(auth::id() == $discussion->user_id)
 
 
@@ -63,10 +66,12 @@
     <div class="card-body">
         <p class="card-text">{!!$reply->content!!}</p>
     </div>
-    {{$discussion->replies()->paginate(3)->links()}}
 </div>
 @endforeach
-<div class="card">
+<div class="pagination-wrapper d-flex justify-content-center">
+{{$discussion->replies()->paginate(3)->links('pagination::bootstrap-4')}}
+    </div>
+<div class="card my-5">
     <div class="card-header">
         <h5 class="card-title">Reply</h5>
 

@@ -3,7 +3,7 @@
 @section('content')
 
 @foreach($discussions as $discussion)
-              <div class="card">
+              <div class="card my-2">
                   <div class="card-header">
 
                   <div class="d-flex justify-content-between"> 
@@ -28,7 +28,8 @@
               </div>
 
 @endforeach
+<div class="pagination-wrapper d-flex justify-content-center">
 
-
-{{$discussions->links()}}
+{{$discussions->links('pagination::bootstrap-4')}}
+</div>
 @endsection

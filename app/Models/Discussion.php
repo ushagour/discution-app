@@ -51,11 +51,10 @@ class Discussion extends ModelsModel
             if (request()->query('channel')) {
                 # code...
 
-                $channel = Channel::where('slug', request()->query('channel'))->first();
+                $channel = Channel::where('slug', request()->query('channel'))->first(); //get channel object using slug li f query d url 
                         
-                        if ($channel) {
-                        
-                            return $builder->where('channel_id',$channel->id);
+                        if ($channel) { //if $channel == true 
+                            return $builder->where('channel_id',$channel->id); // 
                         }
             return $builder;
 
