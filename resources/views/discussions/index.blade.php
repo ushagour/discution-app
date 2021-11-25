@@ -30,6 +30,6 @@
 @endforeach
 <div class="pagination-wrapper d-flex justify-content-center">
 
-{{$discussions->links('pagination::bootstrap-4')}}
+ {{$discussions->appends(['channel'=> request()->query('channel')])->links('pagination::bootstrap-4')}}<!--pagination with query of filter  -->
 </div>
 @endsection
