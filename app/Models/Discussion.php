@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Model as ModelsModel;
+use App\Notifications\ReplyMarkedAsBestReply;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,6 +39,13 @@ class Discussion extends ModelsModel
 
            'reply_id' => $reply->id //wgellna liih y bedel le champ dyalo(object) relply_id  b$id dyal replay jdid  li mssift on parametre 
        ]); 
+
+
+       if ($reply->owner->id == $this->author->id) {
+           # code... ila kan owner dyal dak replay howa niit creator of the discussion 
+           return;
+       }
+       $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion)); 
    }
 
 

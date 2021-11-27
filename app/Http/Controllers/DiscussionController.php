@@ -7,6 +7,7 @@ use App\Models\Discussion;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateDiscussionRequest;
 use App\Models\Reply;
+use App\Notifications\NewReplyAdded;
 use App\Notifications\ReplyMarkedAsBestReply;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
@@ -136,7 +137,12 @@ class DiscussionController extends Controller
 
         // echo'ali';
         $discussion->MarkAsBest($reply); //hena object dyal discussion howa lii feh wahd function Mark s best reply kanssiftoo lih en parametre object reply 
-        $discussion->author->notify(New ReplyMarkedAsBestReply($discussion));// we will create a notification for users how marks best replay 
+       
+       
+       if ($discussion->author->id !== auth::id()) {
+           # code... check if the owner of the discussion is not authonticated user 
+           $discussion->author->notify(New NewReplyAdded($discussion));// we will create a notification for users how marks best replay 
+       }
         return redirect()->back();
         
     }
