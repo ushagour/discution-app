@@ -11,7 +11,8 @@
  
                   <div>
                   <img height="40px" width="40px" style="border-raduis:50%;" src="{{ Gravatar::src($discussion->author->email) }}">
-                  <span class="ml-2 font-weight-bold">{{$discussion->author->name}}</span>
+                  <strong class="ml-2 font-weight-bold">{{$discussion->author->name}}</strong>
+                  <small> {{$discussion->created_at->diffForHumans()}}</small>
                  
                   </div>
                   <div>
@@ -23,7 +24,17 @@
 
                   </div>
                   <div class="card-body">
-                      <p class="card-text">{{$discussion->title}}</p>
+                      <h3 >{{$discussion->title}}</h3>
+                      <p class="card-text">
+                      {!! \Illuminate\Support\Str::limit($discussion->content, 200, '...') !!}
+    
+                      
+                  </div>
+                  <div class="card-footer">
+                    
+                        <b>
+                            {{ $discussion->replies->count()}} Reply
+                        </b>
                   </div>
               </div>
 

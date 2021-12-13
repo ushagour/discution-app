@@ -45,7 +45,7 @@ class RepliesController extends Controller
 
         ]);
 
-        $discussion->author->notify( New NewReplyAdded($discussion)); //melii y tcriya chii replya nsiifto msg l autor dyal discussion 
+       // $discussion->author->notify( New NewReplyAdded($discussion)); //melii y tcriya chii replya nsiifto msg l autor dyal discussion 
 
       return  redirect()->back();
         
