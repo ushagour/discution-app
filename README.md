@@ -37,6 +37,10 @@ php artisan migrate
 ```
 php artisan migrate:fresh
 ```
+### create migration tables 
+```
+php artisan make:migration create_users_table
+```
 
 ### Kifach ndir bach ndekhel users dyal test ?
 ```
