@@ -18,4 +18,10 @@ class Reply extends ModelsModel
     {
         return $this->belongsTo(Discussion::class);
     }
+    
+    public function likes()
+    {
+
+        return $this->hasMany(Like::class);
+    }
 }
