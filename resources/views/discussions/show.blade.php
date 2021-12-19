@@ -66,6 +66,17 @@
     <div class="card-body">
         <p class="card-text">{!!$reply->content!!}</p>
     </div>
+
+    <div class="card-footer">
+
+    @if($reply->is_liked_by_auth_user())
+            <a name="" id="" class="btn btn-danger" href="#" role="button">Unlike</a>
+            @else
+            <a name="" id="" class="btn btn-success" href="#" role="button">like</a>
+    @endif
+
+
+</div>
 </div>
 @endforeach
 <div class="pagination-wrapper d-flex justify-content-center">
