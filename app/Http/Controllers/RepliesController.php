@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateReplyRequest;
 use App\Models\Discussion;
+use App\Models\like;
 use App\Notifications\NewReplyAdded;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Auth;
 
 class RepliesController extends Controller
 {
@@ -97,5 +100,42 @@ class RepliesController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * like a reply 
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function like($id)
+    {
+
+         Like::create([
+            'user_id'=>Auth::id(),
+            'reply_id'=>$id
+
+         ]);
+            Session::flash('success','you liked the reply !');
+         
+       return  redirect()->back();
+         
+    }
+    /**
+     * unlike a reply 
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function unlike($id)
+    {
+
+            $like = Like::where('reply_id',$id)->where('user_id',Auth::id())->first();
+
+             $like->delete();
+// dd($like);
+    Session::flash('success','you unliked the reply !');
+         
+       return  redirect()->back();
+         
     }
 }

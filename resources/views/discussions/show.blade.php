@@ -70,9 +70,9 @@
     <div class="card-footer">
 
     @if($reply->is_liked_by_auth_user())
-            <a name="" id="" class="btn btn-danger" href="#" role="button">Unlike</a>
+            <a name="" id="" class="btn btn-danger" href="{{ Route('reply.unlike',['id'=>$reply->id])}}"role="button">Unlike</a>
             @else
-            <a name="" id="" class="btn btn-success" href="#" role="button">like</a>
+            <a name="" id="" class="btn btn-success" href="{{ Route('reply.like',['id'=>$reply->id])}}"  role="button">like</a>
     @endif
 
 

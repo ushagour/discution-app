@@ -47,10 +47,10 @@ class Reply extends ModelsModel
         #check if auth user in likers array 
             if(in_array($authUser,$likers)) {
                 # code...
-                return false;
+                return true;
             } else {
                 # code...
-                return true;
+                return false;
                 
             }
             

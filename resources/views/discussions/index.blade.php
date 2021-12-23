@@ -37,6 +37,7 @@
                         </b>
                   </div>
               </div>
+              <br>
 
 @endforeach
 <div class="pagination-wrapper d-flex justify-content-center">

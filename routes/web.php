@@ -29,10 +29,12 @@ Route::resource('discussions/{discussion}/replies',RepliesController::class); //
 Route::POST('discussions/{discussion}/replies/{reply}',[DiscussionController::class,'BestReply'])->name('discussion.best-reply');
 
 Route::get('users/notifications',[UsersController::class,'notifications'])->name('users.notifications');//had route dyal notification bach y9rahoom 
- 
 
-Route ::get('test', function (){
+Route::get('reply/like/{id}',[RepliesController::class,'like'])->name('reply.like');
+Route::get('reply/unlike/{id}',[RepliesController::class,'unlike'])->name('reply.unlike');
 
-   echo request()->query('channel');
+// Route ::get('test', function (){
 
-});
+//    echo request()->query('channel');
+
+// });
