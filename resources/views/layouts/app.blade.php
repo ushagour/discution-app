@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>   
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -107,21 +108,16 @@
 
                 @auth       
                 <a href="{{route('discussions.create')}}" style="width: 100%;"  class="btn  btn-info my-2">create discussions</a>                       
-
-         @else
-         <a href="{{route('login')}}" style="width: 100%;"  class="btn  btn-info my-2">sing in to create discussions</a>                       
-
-        @endauth                           
+                @else
+                <a href="{{route('login')}}" style="width: 100%;"  class="btn  btn-info my-2">sing in to create discussions</a>                       
+                @endauth                           
          <ul class="list-group">
-
-                                @foreach($channels as $channel)
-                                <li class="list-group-item">
-                                   <a class="link" href="{{route('discussions.index')}}?channel={{$channel->slug}}">{{$channel->name}}</a>   <!-- route discussion.index dosnt have any parametres we have to pass it using ? url  getparams  -->
-                                </li>
-                                @endforeach
-
-
-                            </ul>
+                @foreach($channels as $channel)
+                <li class="list-group-item">
+                    <a class="link" href="{{route('discussions.index')}}?channel={{$channel->slug}}">{{$channel->name}}</a>   <!-- route discussion.index dosnt have any parametres we have to pass it using ? url  getparams  -->
+                </li>
+                @endforeach
+         </ul>
                     </div>
 
                 

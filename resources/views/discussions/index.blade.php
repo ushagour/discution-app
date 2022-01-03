@@ -3,7 +3,9 @@
 @section('content')
 
 @foreach($discussions as $discussion)
-              <div class="card my-2">
+              <div class="my-3">
+                  <div class="card">
+                 
                   <div class="card-header">
 
                   <div class="d-flex justify-content-between"> 
@@ -27,19 +29,20 @@
                       <h3 >{{$discussion->title}}</h3>
                       <p class="card-text">
                       {!! \Illuminate\Support\Str::limit($discussion->content, 200, '...') !!}
-    
+                      </p>
                       
                   </div>
+           
                   <div class="card-footer">
-                    
-                        <b>
-                            {{ $discussion->replies->count()}} Reply
+                      
+                      <b>
+                          {{ $discussion->replies->count()}} Reply
                         </b>
-                  </div>
-              </div>
-              <br>
+                    </div>
+                </div>
+                </div>
 
-@endforeach
+                    @endforeach
 <div class="pagination-wrapper d-flex justify-content-center">
 
  {{$discussions->appends(['channel'=> request()->query('channel')])->links('pagination::bootstrap-4')}}<!--pagination with query of filter  -->
