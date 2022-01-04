@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\UsersController;
@@ -34,7 +35,11 @@ Route::get('reply/like/{id}',[RepliesController::class,'like'])->name('reply.lik
 Route::get('reply/unlike/{id}',[RepliesController::class,'unlike'])->name('reply.unlike');
 
 // Route ::get('test', function (){
-
 //    echo request()->query('channel');
-
 // });
+
+# Channels resource 
+Route::resource('channel',ChannelController::class);
+Route::post('channel/update',  [ChannelController::class,'update'])->name('channel.update');
+Route::get('channel/destroy/{id}', [ChannelController::class,'destroy']); 
+ Route::get('/channel', [App\Http\Controllers\ChannelController::class, 'index'])->name('channel.index');
