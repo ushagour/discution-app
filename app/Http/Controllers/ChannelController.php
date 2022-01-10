@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DataTables;// darori initalise data table bach tkhdem biiha 
 use Validator;
 use App\Models\Channel;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -64,7 +66,6 @@ class ChannelController extends Controller
     {
         $rules = array(
             'name'    =>  'required',
-            'slug'     =>  'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -76,7 +77,8 @@ class ChannelController extends Controller
 
         $form_data = array(
             'name'        =>  $request->name,
-            'slug'         =>  $request->slug
+            'slug' =>str::slug($request->name),
+
         );
 
         Channel::create($form_data);
@@ -118,7 +120,6 @@ class ChannelController extends Controller
     public function update(Request $request)
     {
         $rules = array(
-            'slug'        =>  'required',
             'name'         =>  'required'
         );
 

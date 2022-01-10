@@ -8,7 +8,6 @@
                  
                   <div class="card-header">
 
-                  <div class="d-flex justify-content-between"> 
                       <!-- //class bootstrap create div with space between content  -->
  
                   <div>

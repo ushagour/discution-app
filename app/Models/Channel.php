@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Model as ModelsModel;
 
-class Channel extends Model
+class Channel extends  ModelsModel
 {
     use HasFactory;
 }
