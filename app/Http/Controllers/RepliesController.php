@@ -48,6 +48,9 @@ class RepliesController extends Controller
 
         ]);
 
+        auth()->user()->point +=25;
+        auth()->user()->save();
+
        // $discussion->author->notify( New NewReplyAdded($discussion)); //melii y tcriya chii replya nsiifto msg l autor dyal discussion 
 
       return  redirect()->back();

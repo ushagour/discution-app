@@ -47,6 +47,8 @@
         <div>
             <img height="40px" width="40px" style="border-raduis:50%;" src="{{ Gravatar::src($reply->owner->email) }}">
             <strong>{{$reply->owner->name}}</strong>
+            (<strong>{{$reply->owner->point}}</strong>)
+
 
         </div>
         <div>
