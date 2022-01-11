@@ -10,6 +10,7 @@
 
                       <!-- //class bootstrap create div with space between content  -->
  
+                  <div class="d-flex justify-content-between">
                   <div>
                   <img height="40px" width="40px" style="border-raduis:50%;" src="{{ Gravatar::src($discussion->author->email) }}">
                   <strong class="ml-2 font-weight-bold">{{$discussion->author->name}}</strong>
@@ -32,13 +33,17 @@
                       
                   </div>
            
-                  <div class="card-footer">
-                      
-                      <b>
-                          {{ $discussion->replies->count()}} Reply
-                        </b>
-                    </div>
+      
                 </div>
+                <div class="card-footer">
+
+                          <b>
+                              {{ $discussion->replies->count()}} Reply
+                            </b>
+    
+                             <a class="pull-right btn btn-default btn-xs" href="{{route('discussions.index')}}?channel={{$discussion->channel->slug}}">{{$discussion->channel->name}}</a>   <!-- route discussion.index dosnt have any parametres we have to pass it using ? url  getparams  -->
+
+                    </div>
                 </div>
 
                     @endforeach
