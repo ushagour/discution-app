@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
     @yield("more_css")
 
+        <!-- toastr -->
+        <script src="{{ asset('js/toastr.js') }}"></script>  
+    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
  
 </head>
 
@@ -144,6 +147,19 @@
         @endif
     </div>
 </body>
+
+<script>
+            
+
+
+            @if(Session::has('toaster-message'))
+            toastr.{{ Session::get('toaster-class') }}("{{ Session::get('toaster-message') }}");
+            
+            @endif
+            
+            
+                                 
+            </script>
 @yield("more_js")
 
 </html>

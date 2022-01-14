@@ -12,6 +12,7 @@ use App\Notifications\ReplyMarkedAsBestReply;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use Illuminate\Validation\ValidationException;
 class DiscussionController extends Controller
 {
 
@@ -55,6 +56,11 @@ class DiscussionController extends Controller
     public function store(CreateDiscussionRequest $request)
     {
         
+        $request->validate([
+            'title' => ['required','max:255'],
+            'content' => ['required'],
+
+        ]);
     
         
         $data=([
@@ -67,11 +73,11 @@ class DiscussionController extends Controller
 
 
         Discussion::create($data);
-        Session::flash('toaster-message', 'post created succesfuly!'); 
-        Session::flash('toaster-class', 'success'); 
-        
-       return redirect()->route('discussions.index');
-    //   dd($request);
+
+        Session::flash('toaster-message','discussion created sucssfuly');
+        Session::flash('toaster-class','success');
+         return redirect()->back();
+
 
 
     }
@@ -143,7 +149,8 @@ class DiscussionController extends Controller
            # code... check if the owner of the discussion is not authonticated user 
            $discussion->author->notify(New NewReplyAdded($discussion));// we will create a notification for users how marks best replay 
        }
-        return redirect()->back();
-        
+       Session::flash('toaster-message','replay marked as best reply');
+        Session::flash('toaster-class','warning');
+         return redirect()->back();
     }
 }

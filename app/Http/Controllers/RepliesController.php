@@ -53,8 +53,9 @@ class RepliesController extends Controller
 
        // $discussion->author->notify( New NewReplyAdded($discussion)); //melii y tcriya chii replya nsiifto msg l autor dyal discussion 
 
-      return  redirect()->back();
-        
+       Session::flash('toaster-message','replay added  successfuly');
+        Session::flash('toaster-class','success');
+         return redirect()->back();        
     
 
 
@@ -118,10 +119,10 @@ class RepliesController extends Controller
             'reply_id'=>$id
 
          ]);
-            Session::flash('success','you liked the reply !');
-         
-       return  redirect()->back();
-         
+         Session::flash('toaster-message',' reply likes successfuly');
+         Session::flash('toaster-class','success');
+          return redirect()->back();        
+     
     }
     /**
      * unlike a reply 
@@ -135,10 +136,10 @@ class RepliesController extends Controller
             $like = Like::where('reply_id',$id)->where('user_id',Auth::id())->first();
 
              $like->delete();
-// dd($like);
-    Session::flash('success','you unliked the reply !');
          
-       return  redirect()->back();
+    Session::flash('toaster-message','you unliked the reply !');
+    Session::flash('toaster-class','error');
+     return redirect()->back();      
          
     }
 }
