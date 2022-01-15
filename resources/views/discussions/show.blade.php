@@ -5,11 +5,17 @@
 <div class="card">
     <div class="card-header">
 
-
-        <img height="40px" width="40px" style="border-raduis:50%;"
+    <div class="d-flex justify-content-between">
+<div>  <img height="40px" width="40px" style="border-raduis:50%;"
             src="{{ Gravatar::src($discussion->author->email) }}">
-        <strong>{{$discussion->author->name}}</strong>
+        <strong>{{$discussion->author->name}}</strong></div>
+<div>
+<a  id="edit" class="btn btn-info" href="{{route('discussions.edit',['discussion'=>$discussion->slug])}}" role="button">Edit</a>
 
+</div>
+    
+
+    </div>
     </div>
 
     <div class="text-center "> <strong>{{$discussion->title}}</strong></div>

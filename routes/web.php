@@ -23,6 +23,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Auth::routes(['verify'=>true]); 
 Route::resource('discussions',DiscussionController::class);
+Route::POST('discussions/{discussion}/update',  [DiscussionController::class,'update'])->name('discussions.update');
+
 Route::resource('discussions/{discussion}/replies',RepliesController::class); //todo hta ntell 3la hadii kiifach katkhdm 
 
 Route::POST('discussions/{discussion}/replies/{reply}',[DiscussionController::class,'BestReply'])->name('discussion.best-reply');
