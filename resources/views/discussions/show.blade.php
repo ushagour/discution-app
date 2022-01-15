@@ -70,12 +70,15 @@
     </div>
 
     <div class="card-footer">
+    @auth
+        @if($reply->is_liked_by_auth_user())
+                <a name="" id="" class="btn btn-danger" href="{{ Route('reply.unlike',['id'=>$reply->id])}}"role="button">Unlike <span class="badge badge-primary ">{{ $reply->likes->count()}}</span></a>
+                @else
+                <a name="" id="" class="btn btn-success" href="{{ Route('reply.like',['id'=>$reply->id])}}"  role="button">like <span class="badge badge-primary ">{{ $reply->likes->count()}}</span></a>
+        @endif
+    @endauth
 
-    @if($reply->is_liked_by_auth_user())
-            <a name="" id="" class="btn btn-danger" href="{{ Route('reply.unlike',['id'=>$reply->id])}}"role="button">Unlike <span class="badge badge-primary ">{{ $reply->likes->count()}}</span></a>
-            @else
-            <a name="" id="" class="btn btn-success" href="{{ Route('reply.like',['id'=>$reply->id])}}"  role="button">like <span class="badge badge-primary ">{{ $reply->likes->count()}}</span></a>
-    @endif
+    <a href="{{route('login')}}"  class="btn  btn-info my-2"> {{ $reply->likes->count()}}-like</a>
 
 
 </div>
