@@ -34,9 +34,10 @@ Route::get('users/notifications',[UsersController::class,'notifications'])->name
 Route::get('reply/like/{id}',[RepliesController::class,'like'])->name('reply.like');
 Route::get('reply/unlike/{id}',[RepliesController::class,'unlike'])->name('reply.unlike');
 
-// Route ::get('test', function (){
+Route ::get('test', function (){
 //    echo request()->query('channel');
-// });
+return view('welcome');
+});
 
 # Channels resource 
 Route::resource('channel',ChannelController::class);

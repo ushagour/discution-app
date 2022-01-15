@@ -63,6 +63,9 @@
                     </a>
     
                     </li>
+                    @endauth
+
+                    @auth
                     <li class="nav-item"><a href="{{route('channel.index')}}" class="nav-link">Channels</a></li>
                     @endauth
                     <li class="nav-item"><a href="{{route('discussions.index')}}" class="nav-link">Discussions</a></li>
