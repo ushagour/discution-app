@@ -33,7 +33,7 @@ class DiscussionController extends Controller
 
 
 
-    return view('discussions.index',['discussions'=>Discussion::filterByChannels()->paginate(3)]);
+    return view('discussions.index')->with(['discussions'=>Discussion::filterByChannels()->paginate(3)]); 
     
     }
 
@@ -94,7 +94,6 @@ class DiscussionController extends Controller
         //
         // dd($discussion);
         return view('discussions.show')->with('discussion',$discussion);
-
     }
 
     /**
@@ -142,7 +141,8 @@ class DiscussionController extends Controller
        Session::flash('toaster-message', 'discussion updated succesfuly!'); 
        Session::flash('toaster-class', 'info'); 
        
-         return redirect()->route('discussions.index');
+         return redirect()->route('discussions.index')
+         ->with(['notifications'=>auth()->user()->notifications()->get()]); 
     }
 
     /**
