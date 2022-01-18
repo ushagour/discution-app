@@ -44,7 +44,7 @@ class ChannelController extends Controller
                     ->make(true);
         }
         return view('channel.index');
-    }
+        }
 
     /**
      * Show the form for creating a new resource.
