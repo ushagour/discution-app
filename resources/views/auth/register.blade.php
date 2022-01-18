@@ -23,13 +23,13 @@
         rel="stylesheet" type="text/css">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
-    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/font-awesome/css/font-awesome.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/magnific-popup/magnific-popup.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-datepicker/css/datepicker3.css')}}" />
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="assets/stylesheets/theme.css" />
+    <link rel="stylesheet" href="{{asset('assets/stylesheets/theme.css')}}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css"
         integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -37,15 +37,14 @@
 
 
     <!-- Skin CSS -->
-    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+    <link rel="stylesheet" href="{{asset('assets/stylesheets/skins/default.css') }}" />
 
     <!-- Theme Custom CSS -->
-    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+    <link rel="stylesheet" href="{{asset('assets/stylesheets/theme-custom.css') }}">
 
     <!-- Head Libs -->
-    <script src="assets/vendor/modernizr/modernizr.js"></script>
-
-</head>
+    <script src="{{asset('assets/vendor/modernizr/modernizr.js')}}"></script>
+	</head>
 
 <body>
     <!-- start: page -->

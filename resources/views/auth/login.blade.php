@@ -23,10 +23,10 @@
         rel="stylesheet" type="text/css">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
-    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/font-awesome/css/font-awesome.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/magnific-popup/magnific-popup.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-datepicker/css/datepicker3.css')}}" />
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="assets/stylesheets/theme.css" />
@@ -34,19 +34,16 @@
         integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-
-
+  
     <!-- Skin CSS -->
-    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+    <link rel="stylesheet" href="{{asset('assets/stylesheets/skins/default.css') }}" />
 
     <!-- Theme Custom CSS -->
-    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+    <link rel="stylesheet" href="{{asset('assets/stylesheets/theme-custom.css') }}">
 
     <!-- Head Libs -->
-    <script src="assets/vendor/modernizr/modernizr.js"></script>
-
-</head>
-
+    <script src="{{asset('assets/vendor/modernizr/modernizr.js')}}"></script>
+	</head>
 <body>
 <!-- start: page -->
 <section class="body-sign">
@@ -141,28 +138,27 @@
 		<!-- end: page -->
 
         </body>
+    <!-- Vendor -->
+    <script src="{{asset('assets/vendor/jquery/jquery.js')}}"></script>
+    <script src="{{asset('assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
+    <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
+    <script src="{{asset('assets/vendor/nanoscroller/nanoscroller.js')}}"></script>
+    <script src="{{asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('assets/vendor/magnific-popup/magnific-popup.js')}}"></script>
+    <script src="{{asset('assets/vendor/jquery-placeholder/jquery.placeholder.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js')}}"
+        integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <!-- Theme Base, Components and Settings -->
+    <script src="{{asset('assets/javascripts/theme.js')}}"></script>
 
-<!-- Vendor -->
-<script src="assets/vendor/jquery/jquery.js"></script>
-<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
-<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
-<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
-<script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"
-    integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<!-- Theme Base, Components and Settings -->
-<script src="assets/javascripts/theme.js"></script>
+    <!-- Theme Custom -->
+    <script src="{{asset('assets/javascripts/theme.custom.js')}}"></script>
 
-<!-- Theme Custom -->
-<script src="assets/javascripts/theme.custom.js"></script>
-
-<!-- Theme Initialization Files -->
-<script src="assets/javascripts/theme.init.js"></script>
+    <!-- Theme Initialization Files -->
+    <script src="{{asset('assets/javascripts/theme.init.js')}}"></script>
 
 
 
