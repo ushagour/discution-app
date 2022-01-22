@@ -23,6 +23,8 @@
         rel="stylesheet" type="text/css">
 
     <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{{asset('assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css')}}" />
+
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/vendor/font-awesome/css/font-awesome.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/vendor/magnific-popup/magnific-popup.css')}}" />
@@ -30,15 +32,13 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{asset('assets/stylesheets/theme.css')}}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css"
-        integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-    @yield("more_css")
+            <!-- Specific Page Vendor CSS -->
+            <link rel="stylesheet" href="{{asset('assets/vendor/pnotify/pnotify.custom.css')}}" />
+
 
     <!-- toastr -->
-    <script src="{{ asset('js/toastr.js') }}"></script>
-    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
+    <!-- <script src="{{ asset('js/toastr.js') }}"></script>
+    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet"> -->
     <!-- Skin CSS -->
     <link rel="stylesheet" href="{{asset('assets/stylesheets/skins/default.css')}}" />
 
@@ -47,6 +47,11 @@
 
     <!-- Head Libs -->
     <script src="{{asset('assets/vendor/modernizr/modernizr.js')}}"></script>
+   @yield('more_css')
+    
+
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" /> -->
+
 
 </head>
 
@@ -57,7 +62,7 @@
         <header class="header">
             <div class="logo-container">
                 <a href="../" class="logo">
-                    <img src="assets/images/logo.png" height="35" alt="Porto Admin" />
+                    <!-- <img src="assets/images/logo.png" height="35" alt="Porto Admin" /> -->
                 </a>
                 <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html"
                     data-fire-event="sidebar-left-opened">
@@ -154,8 +159,8 @@
                     @else
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img src="assets/images/!logged-user.jpg" alt="Joseph Doe" class="img-circle"
-                                data-lock-picture="assets/images/!logged-user.jpg" />
+                            <img src="{{ asset('assets/images/!logged-user.jpg')}}" alt="Joseph Doe" class="img-circle"
+                                data-lock-picture="src={{asset('assets/images/!logged-user.jpg')}}" />
                         </figure>
                         <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
                             <span class="name"> {{ Auth::user()->name }}</span>
@@ -221,9 +226,9 @@
                         <nav id="menu" class="nav-main" role="navigation">
                             <ul class="nav nav-main">
                                 <li>
-                                    <a href="index.html">
+                                    <a href="{{route('discussions.index')}}">
                                         <i class="fa fa-home" aria-hidden="true"></i>
-                                        <span>Dashboard</span>
+                                        <span>Home</span>
                                     </a>
                                 </li>
                                 <li>
@@ -241,7 +246,7 @@
 
                                     @else
                                     <a href="{{route('login')}}">
-                                        <i class="fa fa-home" aria-hidden="true"></i>
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
                                         <span>sing in to create discussions</span>
                                     </a>
 
@@ -386,31 +391,43 @@
     <script src="{{asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('assets/vendor/magnific-popup/magnific-popup.js')}}"></script>
     <script src="{{asset('assets/vendor/jquery-placeholder/jquery.placeholder.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"
-        integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<!-- Specific Page Vendor -->
+    <script src="{{asset('assets/vendor/pnotify/pnotify.custom.js')}}"></script>
+    
+    
     <!-- Theme Base, Components and Settings -->
     <script src="{{asset('assets/javascripts/theme.js')}}"></script>
-
+    
     <!-- Theme Custom -->
     <script src="{{asset('assets/javascripts/theme.custom.js')}}"></script>
-
+    
     <!-- Theme Initialization Files -->
     <script src="{{asset('assets/javascripts/theme.init.js')}}"></script>
-    <script>
-        @if(Session::has('toaster-message'))
-        toastr. {
-            {
-                Session::get('toaster-class')
-            }
-        }("{{ Session::get('toaster-message') }}");
+    @yield("more_js")
+    <!-- Notifications -->
+    <script src="{{asset('assets/javascripts/ui-elements/examples.notifications.js')}}"></script>
 
-        @endif
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
+
+
+    <script>
+//         @if(Session::has('toaster-message'))
+//         PNotify.notice({
+//   text: 'Notice 1.',
+//   stack: new PNotify.Stack({dir1: 'down', firstpos1: 25})
+// });
+        // PNotify. {
+        //     {
+        //         Session::get('toaster-class')
+        //     }
+        // }("{{ Session::get('toaster-message') }}");
+
+        // @endif
 
     </script>
-    @yield("more_js")
 
 
 
