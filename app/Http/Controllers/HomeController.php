@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Channel;
+use App\Models\Discussion;
+use Auth;
+
 
 class HomeController extends Controller
 {
@@ -13,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +27,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        
+        switch (request('filters')) {
+            case 'me':
+                $result = Discussion::where('user_id',Auth::id())->paginate(3);
+                break;
+            
+            default:
+            $result = Discussion::orderBy('created_at')->paginate(3);
+                break;
+        }
+        
+
+
+
+        return view('discussions.index',['discussions'=>$result]);
+
     }
 }

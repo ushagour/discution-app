@@ -69,4 +69,8 @@ class Discussion extends ModelsModel
             }
             return $builder;
    }
+   public function channel()
+   {
+       return $this->belongsTo(Channel::class);
+   }
 }

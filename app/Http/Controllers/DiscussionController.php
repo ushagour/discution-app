@@ -12,6 +12,7 @@ use App\Notifications\ReplyMarkedAsBestReply;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use Illuminate\Validation\ValidationException;
 class DiscussionController extends Controller
 {
 
@@ -30,7 +31,9 @@ class DiscussionController extends Controller
     {
         //
 
-    return view('discussions.index',['discussions'=>Discussion::filterByChannels()->paginate(3)]);
+
+
+    return view('discussions.index')->with(['discussions'=>Discussion::filterByChannels()->paginate(3)]); 
     
     }
 
@@ -55,6 +58,11 @@ class DiscussionController extends Controller
     public function store(CreateDiscussionRequest $request)
     {
         
+        $request->validate([
+            'title' => ['required','max:255'],
+            'content' => ['required'],
+
+        ]);
     
         
         $data=([
@@ -67,11 +75,11 @@ class DiscussionController extends Controller
 
 
         Discussion::create($data);
-        Session::flash('toaster-message', 'post created succesfuly!'); 
-        Session::flash('toaster-class', 'success'); 
-        
-       return redirect()->route('discussions.index');
-    //   dd($request);
+
+        Session::flash('toaster-message','discussion created sucssfuly');
+        Session::flash('toaster-class','success');
+         return redirect()->back();
+
 
 
     }
@@ -79,7 +87,6 @@ class DiscussionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Discussion $discussion)//Todo 9llb 3la route model bunding
@@ -87,30 +94,55 @@ class DiscussionController extends Controller
         //
         // dd($discussion);
         return view('discussions.show')->with('discussion',$discussion);
-
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  model bunding pass slug in parametre un return the object discussion of that slug
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Discussion $discussion)
     {
         //
+        // $discussion =Discussion::find($id); // mankhdmooch bhadi hiit kansifto discussion f parametre niichan 
+        return view('discussions.edit')->with('discussion',$discussion)
+                                        ->with('channels',Channel::all());
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Discussion $discussion 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Discussion $discussion)
     {
-        //
+        // $discussion =Discussion::find($id);
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',//|unique:posts todo see what happen
+            'content' => 'required|max:1000',
+            'channel_id' => 'required',
+        ]);
+
+
+       $discussion->title = $request->title;
+       $discussion->content = $request->content;
+       $discussion->channel_id = $request->channel_id;  
+       $discussion->slug = str::slug($request->title);
+       $discussion->user_id = Auth::id();
+       
+  
+
+
+       $discussion->save();
+
+       Session::flash('toaster-message', 'discussion updated succesfuly!'); 
+       Session::flash('toaster-class', 'info'); 
+       
+         return redirect()->route('discussions.index')
+         ->with(['notifications'=>auth()->user()->notifications()->get()]); 
     }
 
     /**
@@ -143,7 +175,8 @@ class DiscussionController extends Controller
            # code... check if the owner of the discussion is not authonticated user 
            $discussion->author->notify(New NewReplyAdded($discussion));// we will create a notification for users how marks best replay 
        }
-        return redirect()->back();
-        
+       Session::flash('toaster-message','replay marked as best reply');
+        Session::flash('toaster-class','warning');
+         return redirect()->back();
     }
 }

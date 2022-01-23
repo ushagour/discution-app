@@ -24,7 +24,15 @@ Run composer install
  php artisan key:generate.
 ```
 
-
+# tinker
+php artisan tinker
+```
+  
+$user = new App\User;
+$user->name = "Wruce Bayne";
+$user->email = "iambatman@savegotham.com";
+$user->save(); 
+```
 
 # Database
 

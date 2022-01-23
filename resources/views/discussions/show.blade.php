@@ -2,88 +2,111 @@
 
 @section('content')
 
-<div class="card">
-    <div class="card-header">
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+
+                <a id="edit" class="fa fa-edit  fa-lg" href="{{route('discussions.edit',['discussion'=>$discussion->slug])}}"
+                    role="button"></a>
+        </div>
+
+        <h2 class="panel-title">             <img height="40px" width="40px" style="border-radius:50%;"
+                src="{{ Gravatar::src($discussion->author->email) }}"> <strong>{{$discussion->author->name}}</strong></h2>
+        <p class="panel-subtitle"> <small>{{$discussion->created_at->diffForHumans()}}</small></p>
+    </header>
+        <div class="panel-body">
+        <p class="panel-text">{!!$discussion->content!!}</p>
+
+        @if($discussion->BestReply)
+        BEST REPLY
+        
+        <blockquote class="b-thin success">
+        <img height="20px" width="20px" style="border-radius:50%;"
+                        src="{{Gravatar::src( $discussion->BestReply->owner->email)}}" alt="">    
+										<p>{!!$discussion->BestReply->content!!}</p>
+										<small>{{$discussion->BestReply->owner->name}}, <cite title="{{$discussion->BestReply->owner->email}}"></cite></small>
+									</blockquote>
 
 
-        <img height="40px" width="40px" style="border-raduis:50%;"
-            src="{{ Gravatar::src($discussion->author->email) }}">
-        <strong>{{$discussion->author->name}}</strong>
+        @endif
 
     </div>
-
-    <div class="text-center "> <strong>{{$discussion->title}}</strong></div>
-
-    <div class="card-body">
-        <p class="card-text">{!!$discussion->content!!}</p>
-    </div>
-    @if($discussion->BestReply)
-
-    <div class="card text-white bg-success m-3">
-        <div class="card-header d-flex justify-content-between">
-            <!-- les element li fwsst had div ghaykoon wahd esspac biinathom  -->
-            <div> <img height="40px" width="40px" style="border-raduis:50%;"
-                    src="{{Gravatar::src( $discussion->BestReply->owner->email)}}" alt="">
-                <!--  discussion->(bestreply)reply->(owner)user ->email -->
-                <strong>{{$discussion->BestReply->owner->name}}</strong></div>
+</section>
+<!-- replay -->
+    @foreach($discussion->replies as $reply)
+    <div class="panel panel-dark ">
+        <header class="panel-heading">
             <div>
-                <strong>
-                    BEST REPLY
-                </strong>
+                <img height="20px" width="20px" style="border-radius:50%;"
+                    src="{{ Gravatar::src($reply->owner->email) }}">
+                <strong>{{$reply->owner->name}}</strong>
+                (<strong>{{$reply->owner->point}}</strong>)
+
             </div>
+            <div class="panel-actions">
+                @if(auth::id() == $discussion->user_id)
+                <form action="{{route('discussion.best-reply',['discussion'=>$discussion->slug,'reply'=>$reply->id])}}"
+                    method="POST">
+
+                    @csrf
+                    <button class="btn btn-sm btn-warning" type="submit"> Mark as best reply</button>
+
+                </form>
+                @endif
+            </div>
+        </header>
+        <div class="panel-body">
+            <p class="panel-text">{!!$reply->content!!}</p>
         </div>
 
-        <div class="card-body">
-            <p class="card-text">{!!$discussion->BestReply->content!!}</p>
-        </div>
-    </div>
-    @endif
-</div>
-<br>
-@foreach($discussion->replies as $reply)
-<div class="card my-2 ">
-    <div class="card-header d-flex justify-content-between">
-
-        <div>
-            <img height="40px" width="40px" style="border-raduis:50%;" src="{{ Gravatar::src($reply->owner->email) }}">
-            <strong>{{$reply->owner->name}}</strong>
-
-        </div>
-        <div>
-            @if(auth::id() == $discussion->user_id)
-
-
-            <form action="{{route('discussion.best-reply',['discussion'=>$discussion->slug,'reply'=>$reply->id])}}"
-                method="POST">
-
-                @csrf
-                <button class="btn btn-sm btn-warning" type="submit"> Mark as best reply</button>
-
-            </form>
+        <div class="panel-footer">
+            @auth
+            @if($reply->is_liked_by_auth_user())
+            <a name="" id="" class="btn btn-danger" href="{{ Route('reply.unlike',['id'=>$reply->id])}}"
+                role="button">Unlike <span class="badge badge-primary ">{{ $reply->likes->count()}}</span></a>
+            @else
+            <a name="" id="" class="btn btn-success" href="{{ Route('reply.like',['id'=>$reply->id])}}"
+                role="button">like <span class="badge badge-primary ">{{ $reply->likes->count()}}</span></a>
             @endif
+            @endauth
+
+            <!-- <a href="{{route('login')}}" class="btn  btn-info my-2"> {{ $reply->likes->count()}}-like</a>  to do  user point -->
+
+
         </div>
     </div>
-    <div class="card-body">
-        <p class="card-text">{!!$reply->content!!}</p>
-    </div>
-</div>
-@endforeach
-<div class="pagination-wrapper d-flex justify-content-center">
+    <!-- FAQs -->
+
+    @endforeach
+
+    <div class="pagination-wrapper d-flex justify-content-center">
 {{$discussion->replies()->paginate(3)->links('pagination::bootstrap-4')}}
     </div>
-<div class="card my-5">
-    <div class="card-header">
-        <h5 class="card-title">Reply</h5>
 
-    </div>
-    <div class="card-body">
+
+
+<!-- add new replay -->
+<section class="panel">
+    <header class="panel-heading">
+
+
+        <h2 class="panel-title">Add new replay</h2>
+    </header>
+    <div class="panel-body">
+
         @auth
-        <form action="{{route('replies.store',$discussion->slug)}}" method="POST">
+        <form action="{{route('replies.store',$discussion->slug)}}" class="form-horizontal form-bordered" method="POST">
             @csrf
-            <input id="x" type="hidden" name="content">
-            <trix-editor input="x"></trix-editor>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="content">content</label>
+                <div class="col-md-6">
+                    <textarea name="content" id="content" cols="30"></textarea> </div>
+            </div>
+
+
             <button class="btn btn-success my-2" type="submit">reply</button>
-            <!-- //my = margin left and right only  -->
         </form>
         @else
         <a href="{{route('login')}}" style="width: 100%;" class="btn  btn-info my-2">loging to add reply</a>
@@ -92,11 +115,5 @@
 
 
     </div>
-</div>
-
-
-<!-- </div> -->
+</section>
 @endsection
-<script>
-
-</script>

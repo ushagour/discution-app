@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateReplyRequest;
 use App\Models\Discussion;
+use App\Models\like;
 use App\Notifications\NewReplyAdded;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Auth;
 
 class RepliesController extends Controller
 {
@@ -45,10 +48,14 @@ class RepliesController extends Controller
 
         ]);
 
-       // $discussion->author->notify( New NewReplyAdded($discussion)); //melii y tcriya chii replya nsiifto msg l autor dyal discussion 
+        auth()->user()->point +=25;
+        auth()->user()->save();
 
-      return  redirect()->back();
-        
+        $discussion->author->notify( New NewReplyAdded($discussion)); //melii y tcriya chii replya nsiifto msg l autor dyal discussion 
+
+       Session::flash('toaster-message','replay added  successfuly');
+        Session::flash('toaster-class','success');
+         return redirect()->back();        
     
 
 
@@ -97,5 +104,42 @@ class RepliesController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * like a reply 
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function like($id)
+    {
+
+         Like::create([
+            'user_id'=>Auth::id(),
+            'reply_id'=>$id
+
+         ]);
+         Session::flash('toaster-message',' reply likes successfuly');
+         Session::flash('toaster-class','success');
+          return redirect()->back();        
+     
+    }
+    /**
+     * unlike a reply 
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function unlike($id)
+    {
+
+            $like = Like::where('reply_id',$id)->where('user_id',Auth::id())->first();
+
+             $like->delete();
+         
+    Session::flash('toaster-message','you unliked the reply !');
+    Session::flash('toaster-class','error');
+     return redirect()->back();      
+         
     }
 }
