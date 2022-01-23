@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('more_css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+@endsection
 
 @section('content') 
 <div class="my-3">
@@ -87,6 +90,9 @@
 @endsection
 
 @section('more_js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
 <script>
 $(document).ready(function(){
 $('#user_table').dataTable( {

@@ -17,11 +17,9 @@
     </header>
         <div class="panel-body">
         <p class="panel-text">{!!$discussion->content!!}</p>
-    <!-- </div> -->
-                <!-- {!!$discussion->content!!} -->
-        <!-- best  -->
-        BEST REPLY
+
         @if($discussion->BestReply)
+        BEST REPLY
         
         <blockquote class="b-thin success">
         <img height="20px" width="20px" style="border-radius:50%;"
