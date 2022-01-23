@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{asset('assets/vendor/font-awesome/css/font-awesome.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/vendor/magnific-popup/magnific-popup.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-datepicker/css/datepicker3.css')}}" />
+    @yield('more_css')
+
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{asset('assets/stylesheets/theme.css')}}" />
@@ -47,7 +49,6 @@
 
     <!-- Head Libs -->
     <script src="{{asset('assets/vendor/modernizr/modernizr.js')}}"></script>
-   @yield('more_css')
     
 
 
@@ -102,7 +103,7 @@
 
                             <div class="content">
                                 <ul>
-                                    @foreach(auth()->user()->notifications as $notification)
+                                    @foreach(auth()->user()->notifications()->get() as $notification)
 
                                     @if($notification->type == 'App\Notifications\NewReplyAdded' &&
                                     $notification->unread() )
@@ -181,7 +182,7 @@
                                         class="fa fa-lock"></i> Lock Screen</a>
                             </li>
                             <li>
-                                <a role="menuitem" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a role="menuitem" class="dropdown-item"  onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
@@ -384,6 +385,8 @@
 
     <!-- Vendor -->
     <script src="{{asset('assets/vendor/jquery/jquery.js')}}"></script>
+    @yield("more_js")
+
     <script src="{{asset('assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
     <script src="{{asset('assets/vendor/nanoscroller/nanoscroller.js')}}"></script>
@@ -392,7 +395,7 @@
     <script src="{{asset('assets/vendor/jquery-placeholder/jquery.placeholder.js')}}"></script>
 	<!-- Specific Page Vendor -->
     <script src="{{asset('assets/vendor/pnotify/pnotify.custom.js')}}"></script>
-    
+
     
     <!-- Theme Base, Components and Settings -->
     <script src="{{asset('assets/javascripts/theme.js')}}"></script>
@@ -402,7 +405,6 @@
     
     <!-- Theme Initialization Files -->
     <script src="{{asset('assets/javascripts/theme.init.js')}}"></script>
-    @yield("more_js")
     <!-- Notifications -->
     <script src="{{asset('assets/javascripts/ui-elements/examples.notifications.js')}}"></script>
 
