@@ -72,11 +72,15 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Content</label>
                         <div class="col-md-9">
-                            <div class="summernote" name="content" data-plugin-summernote 
-                                data-plugin-options='{ "height": 180, "codemirror": { "theme": "ambiance" } }'> {!!$discussion->content!!}</div>
-                        </div>
+                        <textarea class="summernote"  data-plugin-summernote 
+                                data-plugin-options='{ "height": 180, "codemirror": { "theme": "ambiance" }, "name":"content"  }' name="content"  > {!!$discussion->content!!}</textarea>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                    <button type="submit" class="mb-xs mt-xs my-2 btn btn-default btn-lg btn-block">EDIT</button>
                     </div>
                 
+
                 </form>
             </div>
         </section>
