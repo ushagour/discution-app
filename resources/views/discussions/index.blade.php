@@ -48,8 +48,8 @@
 
 @endforeach
 <button id="default-primary" class="mt-sm mb-sm btn btn-primary">Primary</button>
-<div class="pagination-wrapper d-flex justify-content-center">
 
+<div class="pagination-wrapper col-md-offset-4">
     {{$discussions->appends(['channel'=> request()->query('channel')])->links('pagination::bootstrap-4')}}
     <!--pagination with query of filter  -->
 </div>

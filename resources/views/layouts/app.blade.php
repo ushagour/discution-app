@@ -178,6 +178,13 @@
                                         class="fa fa-user"></i> My Profile</a>
                             </li>
                             <li>
+                                <a role="menuitem" tabindex="-1" href="{{route('home')}}?filters=me"><i
+                                        class="fa  fa-inbox"></i> My discussions</a>
+                            </li>
+
+                    
+
+                            <li>
                                 <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i
                                         class="fa fa-lock"></i> Lock Screen</a>
                             </li>
@@ -237,11 +244,12 @@
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         <span>create discussions</span>
                                     </a>
-                                    <a href="{{route('home')}}?filters=me">
-                                        <i class="fa fa-file-text" aria-hidden="true"></i>
-                                        <span>My discussions</span>
+                               
+                                    <a href="{{route('channel.index')}}">
+                                        <i class="fa fa-suitcase" aria-hidden="true"></i>
+                                        <span> Channels </span>
                                     </a>
-
+                               
 
 
                                     @else

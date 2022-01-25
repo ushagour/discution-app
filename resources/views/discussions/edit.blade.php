@@ -77,7 +77,7 @@
                             </div>
                     </div>
                     <div class="form-group">
-                    <button type="submit" class="mb-xs mt-xs my-2 btn btn-default btn-lg btn-block">EDIT</button>
+                    <button type="submit" class="mb-xs mt-xs my-2 btn btn-default col-md-offset-4 ">EDIT</button>
                     </div>
                 
 

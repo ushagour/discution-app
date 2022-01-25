@@ -18,7 +18,7 @@ class DiscussionController extends Controller
 
     public function __construct()
     {
-         $this->middleware(['auth','verified'])->only('create','store'); 
+         $this->middleware(['auth','verified'])->only('create','store','edit'); 
         //  how to make middleaware auth only for function create and store
         
     }
@@ -122,7 +122,7 @@ class DiscussionController extends Controller
         // $discussion =Discussion::find($id);
         $validatedData = $request->validate([
             'title' => 'required|max:255',//|unique:posts todo see what happen
-            'content' => 'required|max:1000',
+            'content' => 'required',
             'channel_id' => 'required',
         ]);
 
