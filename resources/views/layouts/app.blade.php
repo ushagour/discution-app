@@ -115,7 +115,7 @@
                                                 <i class="fa fa-lock bg-bullhorn"></i>
                                             </div>
                                             <span class="title"> A new replay was added to your discussions
-                                                <strong>{{$notification->data['discussion']['title']}}</strong></span>
+                                               </span>
                                             <span class="message"> {{$notification->created_at->diffForHumans()}}
                                             </span>
                                         </a>
@@ -297,7 +297,7 @@
 
             <section role="main" class="content-body">
                 <header class="page-header">
-                    <h2>Blank Page</h2>
+                    <h2>{{ Route::current()}} </h2>
 
                     <div class="right-wrapper pull-right">
                         <ol class="breadcrumbs">
@@ -421,19 +421,17 @@
 
 
     <script>
-//         @if(Session::has('toaster-message'))
-//         PNotify.notice({
-//   text: 'Notice 1.',
-//   stack: new PNotify.Stack({dir1: 'down', firstpos1: 25})
-// });
-        // PNotify. {
-        //     {
-        //         Session::get('toaster-class')
-        //     }
-        // }("{{ Session::get('toaster-message') }}");
-
-        // @endif
-
+ 
+          @if (Session::has('toaster-message'))
+            new PNotify({
+			title: '{{ Session::get('toaster-message') }}',
+			text: 'Check me out! I\'m a notice.',
+			type: 'custom',
+			addclass: '{{ Session::get('toaster-class') }}',
+			icon: 'fa fa-twitter'
+		});
+    @endif
+    
     </script>
 
 
