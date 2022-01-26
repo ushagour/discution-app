@@ -1,6 +1,20 @@
 @extends('layouts.app')
 @section('more_css')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<!-- Specific Page Vendor CSS -->
+<link rel="stylesheet" href="{{asset('assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/select2/select2.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/dropzone/css/basic.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/dropzone/css/dropzone.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-markdown/css/bootstrap-markdown.min.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/summernote/summernote.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/summernote/summernote-bs3.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/codemirror/lib/codemirror.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/codemirror/theme/monokai.css')}}" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
 @endsection
 
 @section('content') 
@@ -88,11 +102,42 @@
 
 
 @endsection
-
 @section('more_js')
+
+
+<!-- Specific Page Vendor -->
+<script src="{{asset('assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js')}}"></script>
+<script src="{{asset('assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js')}}"></script>
+<script src="{{asset('assets/vendor/select2/select2.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js')}}"></script>
+<script src="{{asset('assets/vendor/jquery-maskedinput/jquery.maskedinput.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js')}}"></script>
+<script src="{{asset('assets/vendor/fuelux/js/spinner.js')}}"></script>
+<script src="{{asset('assets/vendor/dropzone/dropzone.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap-markdown/js/markdown.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap-markdown/js/to-markdown.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap-markdown/js/bootstrap-markdown.js')}}"></script>
+<script src="{{asset('assets/vendor/codemirror/lib/codemirror.js')}}"></script>
+<script src="{{asset('assets/vendor/codemirror/addon/selection/active-line.js')}}"></script>
+<script src="{{asset('assets/vendor/codemirror/addon/edit/matchbrackets.js')}}"></script>
+<script src="{{asset('assets/vendor/codemirror/mode/javascript/javascript.js')}}"></script>
+<script src="{{asset('assets/vendor/codemirror/mode/xml/xml.js')}}"></script>
+<script src="{{asset('assets/vendor/codemirror/mode/htmlmixed/htmlmixed.js')}}"></script>
+<script src="{{asset('assets/vendor/codemirror/mode/css/css.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap-maxlength/bootstrap-maxlength.js')}}"></script>
+<script src="{{asset('assets/vendor/summernote/summernote.js')}}"></script>
+<script src="{{asset('assets/vendor/ios7-switch/ios7-switch.js')}}"></script>
+
+
+<!-- Examples -->
+<script src="{{asset('assets/javascripts/forms/examples.advanced.form.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
+
+
 <script>
 $(document).ready(function(){
 $('#user_table').dataTable( {
@@ -115,7 +160,7 @@ $('#user_table').dataTable( {
         
     } );
 
-console.log('ali');
+// console.log('ali');
 $('#create_record').click(function(){
 
  $('.modal-title').text('Add New Record');

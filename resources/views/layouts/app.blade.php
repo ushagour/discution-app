@@ -34,8 +34,8 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{asset('assets/stylesheets/theme.css')}}" />
-            <!-- Specific Page Vendor CSS -->
-            <link rel="stylesheet" href="{{asset('assets/vendor/pnotify/pnotify.custom.css')}}" />
+      <!-- Specific Page Vendor CSS -->
+  <link rel="stylesheet" href="{{asset('assets/vendor/pnotify/pnotify.custom.css')}}" />
 
 
     <!-- toastr -->
