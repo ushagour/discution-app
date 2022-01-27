@@ -41,7 +41,7 @@ class HomeController extends Controller
 
 
 
-        return view('discussions.index',['discussions'=>$result]);
+        return view('discussions.index',['discussions'=>$result,'title_page'=>'AskMe']);
 
     }
 }

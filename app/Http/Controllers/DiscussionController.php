@@ -32,8 +32,8 @@ class DiscussionController extends Controller
         //
 
 
-
-    return view('discussions.index')->with(['discussions'=>Discussion::filterByChannels()->paginate(3)]); 
+    
+    return view('discussions.index')->with(['discussions'=>Discussion::filterByChannels()->paginate(3),'title_page'=>'Discussions']); 
     
     }
 
@@ -46,7 +46,7 @@ class DiscussionController extends Controller
     {
         //
 
-        return view('discussions.create')->with('channels',Channel::all());
+        return view('discussions.create')->with(['channels',Channel::all(),'title_page'=>'Discussions']);
     }
 
     /**
@@ -93,7 +93,7 @@ class DiscussionController extends Controller
     {
         //
         // dd($discussion);
-        return view('discussions.show')->with('discussion',$discussion);
+        return view('discussions.show')->with(['discussion'=>$discussion,'title_page'=>'Discussions']);
     }
 
     /**
@@ -106,8 +106,7 @@ class DiscussionController extends Controller
     {
         //
         // $discussion =Discussion::find($id); // mankhdmooch bhadi hiit kansifto discussion f parametre niichan 
-        return view('discussions.edit')->with('discussion',$discussion)
-                                        ->with('channels',Channel::all());
+        return view('discussions.edit')->with(['discussion'=>$discussion,'channels'=>Channel::all(),'title_page'=>'Discussions']);
     }
 
     /**
