@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('header')
 <header class="page-header">
-                    <h2> Discussions </h2>
 
                     <div class="right-wrapper pull-right">
                         <ol class="breadcrumbs">

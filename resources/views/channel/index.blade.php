@@ -18,7 +18,7 @@
 @endsection
 @section('header')
 <header class="page-header">
-                    <h2> Discussions </h2>
+                    <h2> All Channels  </h2>
 
                     <div class="right-wrapper pull-right">
                         <ol class="breadcrumbs">
@@ -42,7 +42,6 @@
                  
                   <div class="card-header">
 
-     <h3 align="center">All Channels </h3>
      </div>
      <br />
      <div align="right">

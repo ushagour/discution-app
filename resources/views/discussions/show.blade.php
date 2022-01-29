@@ -18,7 +18,6 @@
 @endsection
 @section('header')
 <header class="page-header">
-    <h2> Discussions </h2>
 
     <div class="right-wrapper pull-right">
         <ol class="breadcrumbs">
@@ -27,7 +26,7 @@
                     <i class="fa fa-home"></i>
                 </a>
             </li>
-            <li><a href="{{route('discussions.show',$discussion->slug')}}"><span>{{$discussion->slug}}</span>
+            <li><a href="{{route('discussions.show',$discussion->slug)}}"><span>{{$discussion->slug}}</span>
                 </a></li>
 
         </ol>
