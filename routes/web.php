@@ -44,3 +44,6 @@ Route::resource('channel',ChannelController::class);
 Route::post('channel/update',  [ChannelController::class,'update'])->name('channel.update');
 Route::get('channel/destroy/{id}', [ChannelController::class,'destroy']); 
  Route::get('/channel', [App\Http\Controllers\ChannelController::class, 'index'])->name('channel.index');
+
+
+ Route::get('user/profile',[UsersController::class,'profile'])->name('user.profile');

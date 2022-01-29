@@ -20,4 +20,10 @@ class UsersController extends Controller
 
         //displayn notfications 
     }
+    public function profile()
+{
+    return view('users.profile');
+
+
+}
 }

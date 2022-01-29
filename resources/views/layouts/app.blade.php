@@ -172,7 +172,7 @@
                         <ul class="list-unstyled">
                             <li class="divider"></li>
                             <li>
-                                <a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i
+                                <a role="menuitem" tabindex="-1" href="{{ route('user.profile') }}"><i
                                         class="fa fa-user"></i> My Profile</a>
                             </li>
                             <li>
