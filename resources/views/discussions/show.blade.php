@@ -16,6 +16,25 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/codemirror/theme/monokai.css')}}" />
 
 @endsection
+@section('header')
+<header class="page-header">
+    <h2> Discussions </h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="{{route('discussions.index')}}">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><a href="{{route('discussions.show',$discussion->slug')}}"><span>{{$discussion->slug}}</span>
+                </a></li>
+
+        </ol>
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+@endsection
 
 @section('content')
 
@@ -27,7 +46,7 @@
             <a id="edit" class="fa fa-edit  fa-lg"
                 href="{{route('discussions.edit',['discussion'=>$discussion->slug])}}" role="button"></a>
         </div>
-@endauth
+        @endauth
         <h2 class="panel-title"> <img height="40px" width="40px" style="border-radius:50%;"
                 src="{{ Gravatar::src($discussion->author->email) }}"> <strong>{{$discussion->author->name}}</strong>
         </h2>
@@ -82,10 +101,12 @@
         @auth
         @if($reply->is_liked_by_auth_user())
         <a class="mb-xs mt-xs mr-xs btn btn-danger" href="{{ Route('reply.unlike',['id'=>$reply->id])}}"
-            role="button"><i class="fa fa-thumbs-down"></i> <span class="badge badge-primary ">{{ $reply->likes->count()}}</span></a>
+            role="button"><i class="fa fa-thumbs-down"></i> <span
+                class="badge badge-primary ">{{ $reply->likes->count()}}</span></a>
 
         @else
-        <a  class="mb-xs mt-xs mr-xs btn btn-success" href="{{ Route('reply.like',['id'=>$reply->id])}}" role="button"> <i class="fa fa-thumbs-up"></i>
+        <a class="mb-xs mt-xs mr-xs btn btn-success" href="{{ Route('reply.like',['id'=>$reply->id])}}" role="button">
+            <i class="fa fa-thumbs-up"></i>
             <span class="badge badge-primary ">{{ $reply->likes->count()}}</span></a>
 
 
@@ -122,13 +143,13 @@
 
             <div class="form-group">
                 <textarea class="summernote" data-plugin-summernote
-                                data-plugin-options='{ "height": 180, "codemirror": { "theme": "ambiance" }, "name":"content"  }'
-                                name="content"></textarea>            
-<br>
-<center>
-<button class="btn btn-success my-2" type="submit">reply</button>
+                    data-plugin-options='{ "height": 180, "codemirror": { "theme": "ambiance" }, "name":"content"  }'
+                    name="content"></textarea>
+                <br>
+                <center>
+                    <button class="btn btn-success my-2" type="submit">reply</button>
 
-</center>
+                </center>
         </form>
         @else
 

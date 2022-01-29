@@ -16,6 +16,25 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/codemirror/theme/monokai.css')}}" />
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
 @endsection
+@section('header')
+<header class="page-header">
+                    <h2> Discussions </h2>
+
+                    <div class="right-wrapper pull-right">
+                        <ol class="breadcrumbs">
+                            <li>
+                                <a  href="{{route('discussions.index')}}">
+                                    <i class="fa fa-home"></i>
+                                </a>
+                            </li>
+                            <li><a  href="{{route('channel.index')}}"><span>Channels </span>
+                                </a></li>
+
+                        </ol>
+                        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+                    </div>
+</header>
+@endsection
 
 @section('content') 
 <div class="my-3">

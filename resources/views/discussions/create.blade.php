@@ -17,10 +17,26 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/codemirror/theme/monokai.css')}}" />
 
 @endsection
+@section('header')
+<header class="page-header">
+                    <h2> Discussions </h2>
+
+                    <div class="right-wrapper pull-right">
+                        <ol class="breadcrumbs">
+                            <li>
+                                <a  href="{{route('discussions.index')}}">
+                                    <i class="fa fa-home"></i>
+                                </a>
+                            </li>
+                            <li><a  href="{{route('discussions.create')}}"><span>create Discussion</span>
+                                </a></li>
+
+                        </ol>
+                        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+                    </div>
+</header>
+@endsection
 @section('content')
-
-
-
 <div class="row">
     <div class="col-xs-12">
         @if(count($errors)>0)

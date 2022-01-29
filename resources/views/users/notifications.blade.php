@@ -1,10 +1,27 @@
 @extends('layouts.app')
+@section('header')
+<header class="page-header">
 
+                    <div class="right-wrapper pull-right">
+                        <ol class="breadcrumbs">
+                            <li>
+                                <a  href="{{route('discussions.index')}}">
+                                    <i class="fa fa-home"></i>
+                                </a>
+                            </li>
+                            <li><a  href="{{route('users.notifications')}}"><span>Notifications</span>
+                                </a></li>
+
+                        </ol>
+                        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+                    </div>
+</header>
+@endsection
 @section('content')
 
 
             <div class="card">
-            <div class="card-header">    Notifications              </div>
+            <div class="card-header">Notifications</div>
                 <div class="card-body">
             <ul class="list-group">
             @foreach($notifications as $notification)
