@@ -50,10 +50,10 @@
 										</div>
 										<div class="widget-content-expanded">
 											<ul class="simple-todo-list">
-												<li class="completed">Update Profile Picture</li>
-												<li class="completed">Change Personal Information</li>
+												<li class="@if(Auth::user()->avatar !=null) completed  @endif">Update Profile Picture</li>
+												<li class="@if(Auth::user()->name !=null) completed  @endif">Change Personal Information</li>
 												<li>Update Social Media</li>
-												<li>Follow Someone</li>
+												<li class="@if(Auth::user()->email_verified_at !=null) completed  @endif">Email Verified</li>
 											</ul>
 										</div>
 									</div>
@@ -86,15 +86,17 @@
 								</header>
 								<div class="panel-body">
 									<ul class="simple-post-list">
+										@foreach(Auth::user()->discussion()->get() as $userdiscussions)
 										<li>
 										
 											<div class="post-info">
-												<a href="#">Nullam Vitae Nibh Un Odiosters</a>
+												<a href="{{route('discussions.show',$userdiscussions->slug)}}">{{$userdiscussions->title}}</a>
 												<div class="post-meta">
-													 Jan 10, 2013
+												{{$userdiscussions->created_at->diffForHumans()}}
 												</div>
 											</div>
 										</li>
+										@endforeach
 									
 									</ul>
 								</div>
@@ -189,27 +191,17 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileFirstName">First Name</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" id="profileFirstName">
+														<input type="text" class="form-control" id="profileFirstName" name="name" value="{{$auth_user->name}}">
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileLastName">Last Name</label>
+													<label class="col-md-3 control-label" for="profileEamil" >Email Address</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" id="profileLastName">
+														<input type="text" class="form-control" id="profileEamil" name="email" value="{{$auth_user->email}}">
 													</div>
 												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileAddress">Address</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" id="profileAddress">
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Company</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" id="profileCompany">
-													</div>
-												</div>
+									
+										
 											</fieldset>
 											<hr class="dotted tall">
 											<h4 class="mb-xlg">About Yourself</h4>
@@ -217,11 +209,11 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileBio">Biographical Info</label>
 													<div class="col-md-8">
-														<textarea class="form-control" rows="3" id="profileBio"></textarea>
+														<textarea class="form-control" rows="3"  name="about" id="profileBio"> {{$auth_user->about}}</textarea>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-xs-3 control-label mt-xs pt-none">Public</label>
+													<label class="col-xs-3 control-label mt-xs pt-none">Public</label> 
 													<div class="col-md-8">
 														<div class="checkbox-custom checkbox-default checkbox-inline mt-xs">
 															<input type="checkbox" checked="" id="profilePublic">
@@ -276,11 +268,12 @@
 							
 							</ul>
 
-							<h4 class="mb-md">Channels</h4>
+							<h4 class="mb-md"> User Channels</h4>
 							<ul class="simple-bullet-list mb-xlg">
 								@foreach(Auth::user()->discussion()->get() as $userdiscussions)
 								<li class="red">
 									<span class="title">{{ $userdiscussions->channel->name}}</span>
+									<!-- todo hta nziido ->distinct() -->
 								</li>
 								@endforeach
 						
