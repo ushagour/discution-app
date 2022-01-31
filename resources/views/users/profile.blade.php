@@ -29,7 +29,7 @@
 							<section class="panel">
 								<div class="panel-body">
 									<div class="thumb-info mb-md">
-										<img src="assets/images/!logged-user.jpg" class="rounded img-responsive" alt="John Doe">
+										<img src="{{asset('assets/images/!logged-user.jpg')}}" class="rounded img-responsive" alt="John Doe">
 										<div class="thumb-info-title">
 											<span class="thumb-info-inner">{{ Auth::user()->name }}</span>
 											<span class="thumb-info-type">CEO</span>
@@ -62,10 +62,7 @@
 
 									<h6 class="text-muted">About</h6>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis vulputate quam. Interdum et malesuada</p>
-									<div class="clearfix">
-										<a class="text-uppercase text-muted pull-right" href="#">(View All)</a>
-									</div>
-
+				
 									<hr class="dotted short">
 
 									<div class="social-icons-list">
@@ -85,79 +82,12 @@
 										<a href="#" class="fa fa-times"></a>
 									</div>
 
-									<h2 class="panel-title">
-										<span class="label label-primary label-sm text-normal va-middle mr-sm">198</span>
-										<span class="va-middle">Friends</span>
-									</h2>
-								</header>
-								<div class="panel-body">
-									<div class="content">
-										<ul class="simple-user-list">
-											<li>
-												<figure class="image rounded">
-													<img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle">
-												</figure>
-												<span class="title">Joseph Doe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="assets/images/!sample-user.jpg" alt="Joseph Junior" class="img-circle">
-												</figure>
-												<span class="title">Joseph Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="assets/images/!sample-user.jpg" alt="Joe Junior" class="img-circle">
-												</figure>
-												<span class="title">Joe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle">
-												</figure>
-												<span class="title">Joseph Doe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-										</ul>
-										<hr class="dotted short">
-										<div class="text-right">
-											<a class="text-uppercase text-muted" href="#">(View All)</a>
-										</div>
-									</div>
-								</div>
-								<div class="panel-footer">
-									<div class="input-group input-search">
-										<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
-											</button>
-										</span>
-									</div>
-								</div>
-							</section>
-
-							<section class="panel">
-								<header class="panel-heading">
-									<div class="panel-actions">
-										<a href="#" class="fa fa-caret-down"></a>
-										<a href="#" class="fa fa-times"></a>
-									</div>
-
 									<h2 class="panel-title">Popular Posts</h2>
 								</header>
 								<div class="panel-body">
 									<ul class="simple-post-list">
 										<li>
-											<div class="post-image">
-												<div class="img-thumbnail">
-													<a href="#">
-														<img src="assets/images/post-thumb-1.jpg" alt="">
-													</a>
-												</div>
-											</div>
+										
 											<div class="post-info">
 												<a href="#">Nullam Vitae Nibh Un Odiosters</a>
 												<div class="post-meta">
@@ -165,36 +95,7 @@
 												</div>
 											</div>
 										</li>
-										<li>
-											<div class="post-image">
-												<div class="img-thumbnail">
-													<a href="#">
-														<img src="assets/images/post-thumb-2.jpg" alt="">
-													</a>
-												</div>
-											</div>
-											<div class="post-info">
-												<a href="#">Vitae Nibh Un Odiosters</a>
-												<div class="post-meta">
-													 Jan 10, 2013
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="post-image">
-												<div class="img-thumbnail">
-													<a href="#">
-														<img src="assets/images/post-thumb-3.jpg" alt="">
-													</a>
-												</div>
-											</div>
-											<div class="post-info">
-												<a href="#">Odiosters Nullam Vitae</a>
-												<div class="post-meta">
-													 Jan 10, 2013
-												</div>
-											</div>
-										</li>
+									
 									</ul>
 								</div>
 							</section>
@@ -377,45 +278,14 @@
 
 							<h4 class="mb-md">Channels</h4>
 							<ul class="simple-bullet-list mb-xlg">
+								@foreach(Auth::user()->discussion()->get() as $userdiscussions)
 								<li class="red">
-									<span class="title">Porto Template</span>
-									<span class="description truncate">Lorem ipsom dolor sit.</span>
+									<span class="title">{{ $userdiscussions->channel->name}}</span>
 								</li>
-                                <!-- todo heta nkml had twichiiya dyal channels dyal user -->
+								@endforeach
 						
 							</ul>
 
-							<h4 class="mb-md">Messages</h4>
-							<ul class="simple-user-list mb-xlg">
-								<li>
-									<figure class="image rounded">
-										<img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle">
-									</figure>
-									<span class="title">Joseph Doe Junior</span>
-									<span class="message">Lorem ipsum dolor sit.</span>
-								</li>
-								<li>
-									<figure class="image rounded">
-										<img src="assets/images/!sample-user.jpg" alt="Joseph Junior" class="img-circle">
-									</figure>
-									<span class="title">Joseph Junior</span>
-									<span class="message">Lorem ipsum dolor sit.</span>
-								</li>
-								<li>
-									<figure class="image rounded">
-										<img src="assets/images/!sample-user.jpg" alt="Joe Junior" class="img-circle">
-									</figure>
-									<span class="title">Joe Junior</span>
-									<span class="message">Lorem ipsum dolor sit.</span>
-								</li>
-								<li>
-									<figure class="image rounded">
-										<img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle">
-									</figure>
-									<span class="title">Joseph Doe Junior</span>
-									<span class="message">Lorem ipsum dolor sit.</span>
-								</li>
-							</ul>
 						</div>
 
 					</div>
