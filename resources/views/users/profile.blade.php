@@ -29,7 +29,7 @@
 							<section class="panel">
 								<div class="panel-body">
 									<div class="thumb-info mb-md">
-										<img src="{{asset('assets/images/!logged-user.jpg')}}" class="rounded img-responsive" alt="John Doe">
+										<img   src="{{ Gravatar::src(Auth::user()->email) }}" class="rounded img-responsive" alt="John Doe">
 										<div class="thumb-info-title">
 											<span class="thumb-info-inner">{{ Auth::user()->name }}</span>
 											<span class="thumb-info-type">CEO</span>
@@ -61,7 +61,7 @@
 									<hr class="dotted short">
 
 									<h6 class="text-muted">About</h6>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis vulputate quam. Interdum et malesuada</p>
+									<p>{{ $auth_user->about}}</p>
 				
 									<hr class="dotted short">
 
@@ -144,30 +144,19 @@
 										<div class="timeline timeline-simple mt-xlg mb-md">
 											<div class="tm-body">
 												<div class="tm-title">
-													<h3 class="h5 text-uppercase">November 2013</h3>
+													<h3 class="h5 text-uppercase"> {{  Carbon\Carbon::now()->format('F Y')  }}</h3>
 												</div>
 												<ol class="tm-items">
+													@foreach($actions as $act)
+
+													@if($act->type =='Status')
+
 													<li>
 														<div class="tm-box">
-															<p class="text-muted mb-none">7 months ago.</p>
+															<p class="text-muted mb-none">{{$act->created_at->diffForHumans()}}..</p>
 															<p>
-																It's awesome when we find a good solution for our projects, Porto Admin is <span class="text-primary">#awesome</span>
-															</p>
-														</div>
-													</li>
-													<li>
-														<div class="tm-box">
-															<p class="text-muted mb-none">7 months ago.</p>
-															<p>
-																What is your biggest developer pain point?
-															</p>
-														</div>
-													</li>
-													<li>
-														<div class="tm-box">
-															<p class="text-muted mb-none">7 months ago.</p>
-															<p>
-																Checkout! How cool is that!
+															{{$act->action}}	
+
 															</p>
 															<div class="thumbnail-gallery">
 																<a class="img-thumbnail lightbox" href="assets/images/projects/project-4.jpg" data-plugin-options='{ "type":"image" }'>
@@ -179,6 +168,18 @@
 															</div>
 														</div>
 													</li>
+										
+													@else
+													<li>
+														<div class="tm-box">
+															<p class="text-muted mb-none">{{$act->created_at->diffForHumans()}}.</p>
+															<p>
+														{{$act->action}}	
+															</p>
+														</div>
+													</li>
+													@endif
+													@endforeach
 												</ol>
 											</div>
 										</div>

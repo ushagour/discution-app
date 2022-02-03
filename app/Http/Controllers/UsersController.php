@@ -24,8 +24,11 @@ class UsersController extends Controller
 {
 
     $user = auth()->user();
-    // dd($user);
-    return view('users.profile')->with('auth_user',$user);
+    $actions = auth()->user()->actions()->get();
+  
+
+    // dd($actions);
+    return view('users.profile')->with('auth_user',$user)->with('actions',$actions);
 
 
 }
