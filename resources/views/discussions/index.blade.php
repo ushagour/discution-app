@@ -1,73 +1,83 @@
 @extends('layouts.app')
 @section('header')
 <header class="page-header">
-                    <h2> Discussions </h2>
+    <h2> Discussions </h2>
 
-                    <div class="right-wrapper pull-right">
-                        <ol class="breadcrumbs">
-                            <li>
-                                <a  href="{{route('discussions.index')}}">
-                                    <i class="fa fa-home"></i>
-                                </a>
-                            </li>
-                        </ol>
-                        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
-                    </div>
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="{{route('discussions.index')}}">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+        </ol>
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
 </header>
 @endsection
 
 @section('content')
 
-@foreach($discussions as $discussion)
-<div class="col-md-12">
+
+<div class="tab-content">
+    <div id="everything" class="tab-pane active">
+
+        <ul class="list-unstyled search-results-list">
+            @foreach($discussions as $discussion)
 
 
-<section class="panel panel-featured panel-featured-info">
-    <header class="panel-heading">
 
-                <img height="40px" width="40px" style="border-radius:50%;"
-                    src="{{ Gravatar::src($discussion->author->email) }}">
-                    <strong class="ml-2 font-weight-bold">{{$discussion->author->name}}
-                <small>{{$discussion->created_at->diffForHumans()}}</small></strong>
-              
-       
 
-        
-        <div class="panel-actions">
-            <a href="{{route('discussions.show',$discussion->slug)}}" class="fa fa-eye"></a>
-   
+            <li>
+
+            <p class="result-type">
+            <a  href="{{route('discussions.show',$discussion->slug)}}">See more</a>
+											<!-- <span class="label label-primary" href="{{route('discussions.show',$discussion->slug)}}"> </span> -->
+										</p>
+                <div class="has-thumb">
+
+             
+                    <div class="result-thumb">
+                        <img height="40px" width="40px" style="border-radius:50%;"
+                            src="{{ Gravatar::src($discussion->author->email) }}">
+                    </div>
+                    <div class="result-data">
+                    <p class="h3 title text-primary">{{$discussion->title}}</p>
+                        <p class="description">
+                            <small> {{$discussion->created_at->diffForHumans()}}</small>
+                            <br />
+                            {!!$discussion->content!!}
+                        </p>
+
+
+                    </div>
+                    </div>
+<div class="col-md-offset-2">
+
+    <i class="fa fa-user"></i> By {{$discussion->author->name}} &nbsp;&nbsp; <i class="fa fa-tag"></i> {{$discussion->channel->name}} &nbsp;&nbsp;
+              <i class="fa fa-comments"></i> {{ $discussion->replies->count()}} Reply
+</div>
+
+
+            </li>
+
+
+            @endforeach
+        </ul>
+
+        <hr class="solid mb-none" />
+        <div class="pagination-wrapper col-md-offset-4">
+            {{$discussions->appends(['channel'=> request()->query('channel')])->links('pagination::bootstrap-4')}}
+            <!--pagination with query of filter  -->
         </div>
-    </header>
-    <div class="panel-body">
-    <h2 class="panel-title"><a href="{{route('discussions.show',$discussion->slug)}}">{{$discussion->title}}</a></h2>
-
-    
-
-
     </div>
 
-    <div class="panel-footer">
-
-        <b>
-            {{ $discussion->replies->count()}} Reply
-        </b>
-
-        <a class="pull-right btn btn-default btn-xs"
-            href="{{route('discussions.index')}}?channel={{$discussion->channel->slug}}">{{$discussion->channel->name}}</a>
-        <!-- route discussion.index dosnt have any parametres we have to pass it using ? url  getparams  -->
-
-    </div>
-    
-</section>
 </div>
 
 
-@endforeach
 
-<div class="pagination-wrapper col-md-offset-4">
-    {{$discussions->appends(['channel'=> request()->query('channel')])->links('pagination::bootstrap-4')}}
-    <!--pagination with query of filter  -->
-</div>
+
+
 
 
 @endsection
