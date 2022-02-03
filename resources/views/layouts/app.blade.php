@@ -157,10 +157,10 @@
                     @else
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img src="{{ asset('assets/images/!logged-user.jpg')}}" alt="Joseph Doe" class="img-circle"
-                                data-lock-picture="src={{asset('assets/images/!logged-user.jpg')}}" />
+                            <img  src="{{ Gravatar::src(Auth::user()->email) }}" alt="{{Auth::user()->name}}" class="img-circle"
+                                data-lock-picture="src={{ Gravatar::src(Auth::user()->email) }}" />
                         </figure>
-                        <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
+                        <div class="profile-info" data-lock-name="{{Auth::user()->name}}" data-lock-email="{{Auth::user()->email}}">
                             <span class="name"> {{ Auth::user()->name }}</span>
                             <span class="role">administrator</span>
                         </div>

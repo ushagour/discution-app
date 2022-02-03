@@ -62,6 +62,9 @@ public function discussion()
     {
          return   $this->hasOne(Profile::class);
     }
- 
+    public function actions()
+    {
+        return $this->hasMany(Action::class);
+    }
 
 }
