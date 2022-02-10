@@ -147,6 +147,7 @@
 													<h3 class="h5 text-uppercase"> {{  Carbon\Carbon::now()->format('F Y')  }}</h3>
 												</div>
 												<ol class="tm-items">
+													@if(isset($actions))
 													@foreach($actions as $act)
 
 													@if($act->type =='Status')
@@ -180,6 +181,8 @@
 													</li>
 													@endif
 													@endforeach
+													@endif
+
 												</ol>
 											</div>
 										</div>
