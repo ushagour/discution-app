@@ -66,19 +66,22 @@
                     data-fire-event="sidebar-left-opened">
                     <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
                 </div>
+</a>
             </div>
 
             <!-- start: search & user box -->
             <div class="header-right">
 
-                <form action="pages-search-results.html" class="search nav-form">
+
+
+                 <form class="search nav-form" method="GET" action="{{route('Search')}}">
                     <div class="input-group input-search">
-                        <input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+                        <input type="text" class="form-control" name="query"  placeholder="Search...">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
-                </form>
+                </form> 
 
                 <span class="separator"></span>
 

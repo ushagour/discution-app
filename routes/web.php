@@ -47,3 +47,4 @@ Route::get('channel/destroy/{id}', [ChannelController::class,'destroy']);
 
 
  Route::get('user/profile',[UsersController::class,'profile'])->name('user.profile');
+ Route::get('/result',[App\Http\Controllers\HomeController::class,'Search'])->name('Search');
