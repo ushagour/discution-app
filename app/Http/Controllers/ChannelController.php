@@ -43,7 +43,7 @@ class ChannelController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('channel.index');
+        return view('channel.index',['title_page'=>'Channel Dashbord']);
         }
 
     /**

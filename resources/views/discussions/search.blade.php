@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('header')
 <header class="page-header">
-    <h2> Discussions </h2>
+    <h2> Results </h2>
 
     <div class="right-wrapper pull-right">
         <ol class="breadcrumbs">
@@ -23,7 +23,7 @@
     <div id="everything" class="tab-pane active">
 
         <ul class="list-unstyled search-results-list">
-            @foreach($discussions as $discussion)
+            @foreach($results as $discussion)
 
 
 
@@ -67,7 +67,7 @@
 
         <hr class="solid mb-none" />
         <div class="pagination-wrapper col-md-offset-4">
-            {{$discussions->appends(['channel'=> request()->query('channel')])->links('pagination::bootstrap-4')}}
+            {{$results->links()}}
             <!--pagination with query of filter  -->
         </div>
     </div>

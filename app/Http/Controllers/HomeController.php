@@ -41,7 +41,17 @@ class HomeController extends Controller
 
 
 
-        return view('discussions.index',['discussions'=>$result]);
+        return view('discussions.index',['discussions'=>$result,'title_page'=>'AskMe']);
 
+    }
+    public function Search()
+    {
+
+     $discussion =Discussion:: where('title','like','%'.request('query').'%')->paginate(4);
+//ToDO hta nziid l3iiba dyal appercase 3la hssab recherch 
+    //  dd($discussion);
+     return view('discussions.search')->with('query',request('query'))
+                          ->with('results',$discussion);
+                    
     }
 }

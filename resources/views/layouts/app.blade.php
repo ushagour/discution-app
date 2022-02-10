@@ -29,11 +29,13 @@
     <link rel="stylesheet" href="{{asset('assets/vendor/font-awesome/css/font-awesome.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/vendor/magnific-popup/magnific-popup.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-datepicker/css/datepicker3.css')}}" />
+    @yield('more_css')
+
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{asset('assets/stylesheets/theme.css')}}" />
-            <!-- Specific Page Vendor CSS -->
-            <link rel="stylesheet" href="{{asset('assets/vendor/pnotify/pnotify.custom.css')}}" />
+      <!-- Specific Page Vendor CSS -->
+  <link rel="stylesheet" href="{{asset('assets/vendor/pnotify/pnotify.custom.css')}}" />
 
 
     <!-- toastr -->
@@ -47,7 +49,6 @@
 
     <!-- Head Libs -->
     <script src="{{asset('assets/vendor/modernizr/modernizr.js')}}"></script>
-   @yield('more_css')
     
 
 
@@ -61,25 +62,26 @@
         <header class="header">
             <div class="logo-container">
                 <a href="../" class="logo">
-                    <!-- <img src="assets/images/logo.png" height="35" alt="Porto Admin" /> -->
-                </a>
                 <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html"
                     data-fire-event="sidebar-left-opened">
                     <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
                 </div>
+</a>
             </div>
 
             <!-- start: search & user box -->
             <div class="header-right">
 
-                <form action="pages-search-results.html" class="search nav-form">
+
+
+                 <form class="search nav-form" method="GET" action="{{route('Search')}}">
                     <div class="input-group input-search">
-                        <input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+                        <input type="text" class="form-control" name="query"  placeholder="Search...">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
-                </form>
+                </form> 
 
                 <span class="separator"></span>
 
@@ -102,7 +104,7 @@
 
                             <div class="content">
                                 <ul>
-                                    @foreach(auth()->user()->notifications as $notification)
+                                    @foreach(auth()->user()->notifications()->get() as $notification)
 
                                     @if($notification->type == 'App\Notifications\NewReplyAdded' &&
                                     $notification->unread() )
@@ -114,7 +116,7 @@
                                                 <i class="fa fa-lock bg-bullhorn"></i>
                                             </div>
                                             <span class="title"> A new replay was added to your discussions
-                                                <strong>{{$notification->data['discussion']['title']}}</strong></span>
+                                               </span>
                                             <span class="message"> {{$notification->created_at->diffForHumans()}}
                                             </span>
                                         </a>
@@ -158,10 +160,10 @@
                     @else
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img src="{{ asset('assets/images/!logged-user.jpg')}}" alt="Joseph Doe" class="img-circle"
-                                data-lock-picture="src={{asset('assets/images/!logged-user.jpg')}}" />
+                            <img  src="{{ Gravatar::src(Auth::user()->email) }}" alt="{{Auth::user()->name}}" class="img-circle"
+                                data-lock-picture="src={{ Gravatar::src(Auth::user()->email) }}" />
                         </figure>
-                        <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
+                        <div class="profile-info" data-lock-name="{{Auth::user()->name}}" data-lock-email="{{Auth::user()->email}}">
                             <span class="name"> {{ Auth::user()->name }}</span>
                             <span class="role">administrator</span>
                         </div>
@@ -173,15 +175,22 @@
                         <ul class="list-unstyled">
                             <li class="divider"></li>
                             <li>
-                                <a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i
+                                <a role="menuitem" tabindex="-1" href="{{ route('user.profile') }}"><i
                                         class="fa fa-user"></i> My Profile</a>
                             </li>
+                            <li>
+                                <a role="menuitem" tabindex="-1" href="{{route('home')}}?filters=me"><i
+                                        class="fa  fa-inbox"></i> My discussions</a>
+                            </li>
+
+                    
+
                             <li>
                                 <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i
                                         class="fa fa-lock"></i> Lock Screen</a>
                             </li>
                             <li>
-                                <a role="menuitem" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a role="menuitem" class="dropdown-item"  onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
@@ -227,7 +236,7 @@
                                 <li>
                                     <a href="{{route('discussions.index')}}">
                                         <i class="fa fa-home" aria-hidden="true"></i>
-                                        <span>Home</span>
+                                        <span>Discussions</span>
                                     </a>
                                 </li>
                                 <li>
@@ -236,11 +245,12 @@
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         <span>create discussions</span>
                                     </a>
-                                    <a href="{{route('home')}}?filters=me">
-                                        <i class="fa fa-file-text" aria-hidden="true"></i>
-                                        <span>My discussions</span>
+                               
+                                    <a href="{{route('channel.index')}}">
+                                        <i class="fa fa-suitcase" aria-hidden="true"></i>
+                                        <span> Channels </span>
                                     </a>
-
+                               
 
 
                                     @else
@@ -285,25 +295,11 @@
 
             </aside>
             <!-- end: sidebar -->
-
+            
+            
             <section role="main" class="content-body">
-                <header class="page-header">
-                    <h2>Blank Page</h2>
-
-                    <div class="right-wrapper pull-right">
-                        <ol class="breadcrumbs">
-                            <li>
-                                <a href="index.html">
-                                    <i class="fa fa-home"></i>
-                                </a>
-                            </li>
-                            <li><span>Pages</span></li>
-                            <li><span>Blank Page</span></li>
-                        </ol>
-
-                        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
-                    </div>
-                </header>
+                @yield('header')
+         
                 @yield('content')
 
                 <!-- start: page -->
@@ -384,6 +380,8 @@
 
     <!-- Vendor -->
     <script src="{{asset('assets/vendor/jquery/jquery.js')}}"></script>
+    @yield("more_js")
+
     <script src="{{asset('assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
     <script src="{{asset('assets/vendor/nanoscroller/nanoscroller.js')}}"></script>
@@ -392,7 +390,7 @@
     <script src="{{asset('assets/vendor/jquery-placeholder/jquery.placeholder.js')}}"></script>
 	<!-- Specific Page Vendor -->
     <script src="{{asset('assets/vendor/pnotify/pnotify.custom.js')}}"></script>
-    
+
     
     <!-- Theme Base, Components and Settings -->
     <script src="{{asset('assets/javascripts/theme.js')}}"></script>
@@ -402,7 +400,6 @@
     
     <!-- Theme Initialization Files -->
     <script src="{{asset('assets/javascripts/theme.init.js')}}"></script>
-    @yield("more_js")
     <!-- Notifications -->
     <script src="{{asset('assets/javascripts/ui-elements/examples.notifications.js')}}"></script>
 
@@ -411,19 +408,17 @@
 
 
     <script>
-//         @if(Session::has('toaster-message'))
-//         PNotify.notice({
-//   text: 'Notice 1.',
-//   stack: new PNotify.Stack({dir1: 'down', firstpos1: 25})
-// });
-        // PNotify. {
-        //     {
-        //         Session::get('toaster-class')
-        //     }
-        // }("{{ Session::get('toaster-message') }}");
-
-        // @endif
-
+ 
+          @if (Session::has('toaster-message'))
+            new PNotify({
+			title: '{{ Session::get('toaster-message') }}',
+			text: 'Check me out! I\'m a notice.',
+			type: 'custom',
+			addclass: '{{ Session::get('toaster-class') }}',
+			icon: 'fa fa-twitter'
+		});
+    @endif
+    
     </script>
 
 

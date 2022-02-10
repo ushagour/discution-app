@@ -20,4 +20,16 @@ class UsersController extends Controller
 
         //displayn notfications 
     }
+    public function profile()
+{
+
+    $user = auth()->user();
+    $actions = auth()->user()->actions()->get();
+  
+
+    // dd($actions);
+    return view('users.profile')->with('auth_user',$user)->with('actions',$actions);
+
+
+}
 }

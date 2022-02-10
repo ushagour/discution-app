@@ -41,6 +41,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+public function discussion()
+{
+    return $this->hasMany(Discussion::class);
+
+}
+
     public function replies()
     {
         return $this->hasMany(Reply::class);
@@ -51,5 +57,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
          return   $this->hasMany(Like::class);
     }
- 
+
+    public function profile()
+    {
+         return   $this->hasOne(Profile::class);
+    }
+    public function actions()
+    {
+        return $this->hasMany(Action::class);
+    }
+
 }

@@ -1,4 +1,22 @@
 @extends('layouts.app')
+@section('header')
+<header class="page-header">
+
+                    <div class="right-wrapper pull-right">
+                        <ol class="breadcrumbs">
+                            <li>
+                                <a  href="{{route('discussions.index')}}">
+                                    <i class="fa fa-home"></i>
+                                </a>
+                            </li>
+                            <li><a  href="{{route('discussions.edit')}}"><span>Edit Discussion</span>
+                                </a></li>
+
+                        </ol>
+                        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+                    </div>
+</header>
+@endsection
 @section('more_css')
 <!-- Specific Page Vendor CSS -->
 <link rel="stylesheet" href="{{asset('assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css')}}" />
@@ -67,20 +85,20 @@
                             </select> </div>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <input id="x" type="hidden" name="content">
-                        <trix-editor input="x"></trix-editor> 
-                    </div> -->
+
 
                     <div class="form-group">
                         <label class="col-md-3 control-label">Content</label>
                         <div class="col-md-9">
-                            <div class="summernote" data-plugin-summernote
-                                data-plugin-options='{ "height": 180, "codemirror": { "theme": "ambiance" } }'>Start
-                                typing...</div>
-                        </div>
+                        <textarea class="summernote"  data-plugin-summernote 
+                                data-plugin-options='{ "height": 180, "codemirror": { "theme": "ambiance" }, "name":"content"  }' name="content"  > {!!$discussion->content!!}</textarea>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                    <button type="submit" class="mb-xs mt-xs my-2 btn btn-default col-md-offset-4 ">EDIT</button>
                     </div>
                 
+
                 </form>
             </div>
         </section>
