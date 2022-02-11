@@ -74,7 +74,7 @@
 @foreach($discussion->replies as $reply)
 <div class="panel panel-dark ">
     <header class="panel-heading">
-        <div>
+        <div class="text-muted">
             <img height="20px" width="20px" style="border-radius:50%;" src="{{ Gravatar::src($reply->owner->email) }}">
             <strong>{{$reply->owner->name}}</strong>
             (<strong>{{$reply->owner->point}}</strong>)

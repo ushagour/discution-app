@@ -104,9 +104,9 @@ class DiscussionController extends Controller
      */
     public function edit(Discussion $discussion)
     {
-        //
+        // echo $discussion->slug;
         // $discussion =Discussion::find($id); // mankhdmooch bhadi hiit kansifto discussion f parametre niichan 
-        return view('discussions.edit')->with(['discussion'=>$discussion,'channels'=>Channel::all(),'title_page'=>'Discussions']);
+        return view('discussions.edit')->with(['discussion'=>$discussion,'channels'=>Channel::all()]);
     }
 
     /**
