@@ -48,7 +48,13 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "mysetup":[
+            "@php artisan migrate:refresh --ansi",
+            "@php artisan db:seed --ansi",
+            "@php artisan test"
         ]
+
     },
     "extra": {
         "laravel": {
@@ -62,4 +68,6 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
+ 
+    
 }
