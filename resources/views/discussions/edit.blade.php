@@ -9,7 +9,6 @@
                                     <i class="fa fa-home"></i>
                                 </a>
                             </li>
-                            <li><a  href="{{route('discussions.edit')}}"><span>Edit Discussion</span>
                                 </a></li>
 
                         </ol>
@@ -63,7 +62,7 @@
             </header>
             <div class="panel-body">
                 <form class="form-horizontal form-bordered"
-                    action="{{Route('discussions.update',['discussion'=> $discussion->slug])}}" method="POST">
+                    action="{{Route('discussions.update',['discussion'=>$discussion->slug])}}" method="POST">
 
                     @csrf
 

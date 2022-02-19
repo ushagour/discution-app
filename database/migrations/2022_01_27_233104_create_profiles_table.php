@@ -19,6 +19,7 @@ class CreateProfilesTable extends Migration
             $table->string('facebook')->nullable();
             $table->string('github')->nullable();
             $table->string('google')->nullable();
+            $table->string('about')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');// ->onDelete('cascade') on delete cascade pour supprimer les lien entre table category and posts 
             $table->string('active')->default(0);

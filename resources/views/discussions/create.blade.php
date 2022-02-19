@@ -79,7 +79,6 @@
                         <div class="col-md-6">
                             <select id="channel" class="form-control" name="channel_id">
                                 @foreach($channels as $channel)
-
                                 <option value="{{$channel->id}}">{{$channel->name}}</option>
                                 @endforeach
                             </select> </div>
@@ -89,8 +88,7 @@
                         <div class="col-md-9">
                             <textarea class="summernote" data-plugin-summernote
                                 data-plugin-options='{ "height": 180, "codemirror": { "theme": "ambiance" }, "name":"content"  }'
-                                name="content">Start
-                                typing..</textarea>
+                                name="content"></textarea>
 
                         </div>
                     </div>
