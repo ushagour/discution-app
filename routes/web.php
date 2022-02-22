@@ -6,7 +6,8 @@ use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\UsersController;
 use App\Models\Discussion;
 use Illuminate\Support\Facades\Route;
-
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,7 @@ Route::get('reply/unlike/{id}',[RepliesController::class,'unlike'])->name('reply
 // Route ::get('test', function (){
 // //    echo request()->query('channel');
 // return view('welcome');
+
 // });
 
 # Channels resource 
@@ -48,3 +50,51 @@ Route::get('channel/destroy/{id}', [ChannelController::class,'destroy']);
 
  Route::get('user/profile',[UsersController::class,'profile'])->name('user.profile');
  Route::get('/result',[App\Http\Controllers\HomeController::class,'Search'])->name('Search');
+
+
+ Route::get('/auth/github/redirect', function () {
+    return Socialite::driver('github')->redirect();
+})->name('login-github');
+ 
+Route::get('/auth/github/callback', function () {
+ 
+    // try {
+    //     // exception hiiya  git hub ga3  ma autoriza liina user bach y tautonticca l app
+    //     $SocialiteUser = Socialite::driver('github')->user();
+
+    // } catch (\Throwable $th) {
+    //     //throw $th; ok rj3o l login page 
+
+    //     return redirect('login');
+    // }
+
+    $githubUser = Socialite::driver('github')->user();
+ 
+    dd($githubUser);
+    $user = User::create([
+                    'name' => $githubUser->name,
+                    'email' => $githubUser->email,
+                    'provider_id' => $githubUser->id,
+                    'provider_token' => $githubUser->token,
+                    'provider_refresh_token' => $githubUser->refreshToken,
+                ]);
+//     $user = User::where('provider_id', $githubUser->id)->first();
+//     if ($user==null) {
+//         $user = User::create([
+//             'name' => $githubUser->name,
+//             'email' => $githubUser->email,
+//             'provider_id' => $githubUser->id,
+//             'github_token' => $githubUser->token,
+//             'github_refresh_token' => $githubUser->refreshToken,
+//         ]);
+//     } else {
+//         $user->update([
+//             'github_token' => $githubUser->token,
+//             'github_refresh_token' => $githubUser->refreshToken,
+//         ]);
+//     }
+//  dd($user);
+    // Auth::login($user);
+ 
+    // return redirect('/');
+});

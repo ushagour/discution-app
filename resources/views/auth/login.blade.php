@@ -122,7 +122,7 @@
 							</span>
 
 							<div class="mb-xs text-center">
-								<a class="btn btn-facebook mb-md ml-xs mr-xs">Connect with <i class="fa fa-facebook"></i></a>
+								<a href="{{route('login-github')}}" class="btn btn-dark mb-md ml-xs mr-xs">Connect with <i class="fa fa-github"></i></a>
 								<a class="btn btn-twitter mb-md ml-xs mr-xs">Connect with <i class="fa fa-twitter"></i></a>
 							</div>
 
