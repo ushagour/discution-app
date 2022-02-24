@@ -7,6 +7,8 @@ use App\Http\Controllers\UsersController;
 use App\Models\Discussion;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -58,43 +60,38 @@ Route::get('channel/destroy/{id}', [ChannelController::class,'destroy']);
  
 Route::get('/auth/github/callback', function () {
  
-    // try {
-    //     // exception hiiya  git hub ga3  ma autoriza liina user bach y tautonticca l app
-    //     $SocialiteUser = Socialite::driver('github')->user();
+    try {
+        // exception hiiya  git hub ga3  ma autoriza liina user bach y tautonticca l app
+        $SocialiteUser = Socialite::driver('github')->user();
 
-    // } catch (\Throwable $th) {
-    //     //throw $th; ok rj3o l login page 
+    } catch (\Throwable $th) {
+        //throw $th; ok rj3o l login page 
 
-    //     return redirect('login');
-    // }
+        return redirect('login');
+    }
 
-    $githubUser = Socialite::driver('github')->user();
  
-    dd($githubUser);
-    $user = User::create([
-                    'name' => $githubUser->name,
-                    'email' => $githubUser->email,
-                    'provider_id' => $githubUser->id,
-                    'provider_token' => $githubUser->token,
-                    'provider_refresh_token' => $githubUser->refreshToken,
-                ]);
-//     $user = User::where('provider_id', $githubUser->id)->first();
-//     if ($user==null) {
-//         $user = User::create([
-//             'name' => $githubUser->name,
-//             'email' => $githubUser->email,
-//             'provider_id' => $githubUser->id,
-//             'github_token' => $githubUser->token,
-//             'github_refresh_token' => $githubUser->refreshToken,
-//         ]);
-//     } else {
-//         $user->update([
-//             'github_token' => $githubUser->token,
-//             'github_refresh_token' => $githubUser->refreshToken,
-//         ]);
-//     }
-//  dd($user);
-    // Auth::login($user);
+    $user = User::where('provider_id', $SocialiteUser->id)->first();
  
-    // return redirect('/');
+    if ($user) {
+        $user->update([
+            'provider_token' => $SocialiteUser->token,
+            'provider_refresh_token' => $SocialiteUser->refreshToken,
+        ]);
+    } else {
+        
+        $user = User::create([
+            'name' => $SocialiteUser->name,
+            'email' => $SocialiteUser->email,
+            'password' => Hash::make('password'), 
+            'provider_id' => $SocialiteUser->id,
+            'provider_token' => $SocialiteUser->token,
+            'provider_refresh_token' => $SocialiteUser->refreshToken,
+        ]);
+    }
+    // dd($user);
+ 
+    Auth::login($user);
+ 
+    return redirect('/');
 });
