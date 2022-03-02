@@ -23,6 +23,8 @@ use App\Models\User;
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/lockscreen', [App\Http\Controllers\LockSceenController::class, 'lockscreen'])->name('lockscreen');
+Route::POST('/unlock', [App\Http\Controllers\LockSceenController::class, 'unlock'])->name('login.unlock');
 
 Auth::routes(['verify'=>true]); 
 Route::resource('discussions',DiscussionController::class);

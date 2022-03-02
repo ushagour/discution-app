@@ -186,7 +186,7 @@
                     
 
                             <li>
-                                <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i
+                                <a role="menuitem" tabindex="-1" href="{{route('lockscreen')}}" ><i
                                         class="fa fa-lock"></i> Lock Screen</a>
                             </li>
                             <li>
