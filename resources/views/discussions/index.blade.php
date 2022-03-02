@@ -20,56 +20,51 @@
 
 
 <div class="tab-content">
-    <div id="everything" class="tab-pane active">
 
-        <ul class="list-unstyled search-results-list">
-            @foreach($discussions as $discussion)
-
+    <ul class="list-unstyled search-results-list">
+        @foreach($discussions as $discussion)
 
 
 
-            <li>
 
-            <p class="result-type">
-            <a  href="{{route('discussions.show',$discussion->slug)}}">See more</a>
-											<!-- <span class="label label-primary" href="{{route('discussions.show',$discussion->slug)}}"> </span> -->
-										</p>
-                <div class="has-thumb">
+        <li>
 
-             
-                    <div class="result-thumb">
-                        <img height="40px" width="40px" style="border-radius:50%;"
-                            src="{{ Gravatar::src($discussion->author->email) }}">
-                    </div>
-                    <div class="result-data">
-                    <p class="h3 title text-primary">{{$discussion->title}}</p>
-                        <p class="description">
-                            <small> {{$discussion->created_at->diffForHumans()}}</small>
-                            <br />
-                            {!!$discussion->content!!}
-                        </p>
+        <a href="{{route('discussions.show',$discussion->slug)}}" class="has-thumb">
 
 
-                    </div>
-                    </div>
-<div class="col-md-offset-2">
+                <div class="result-thumb">
+                    <img height="40px" width="40px" style="border-radius:50%;"
+                        src="{{ Gravatar::src($discussion->author->email) }}">
+                </div>
+                <div class="result-data">
 
-    <i class="fa fa-user"></i> By {{$discussion->author->name}} &nbsp;&nbsp; <i class="fa fa-tag"></i> {{$discussion->channel->name}} &nbsp;&nbsp;
-              <i class="fa fa-comments"></i> {{ $discussion->replies->count()}} Reply
-</div>
+                    <p  class="h4 title text-primary">{{$discussion->title}}</p>
+                    <p class="description">
+                        {!!$discussion->content!!}
+                    </p>
 
 
-            </li>
+                </div>
+</a>
+            <div class="col-md-offset-2">
+
+                <i class="fa fa-clock-o"></i> {{$discussion->created_at->diffForHumans()}} &nbsp;&nbsp;
+                <i class="fa fa-user"></i> By {{$discussion->author->name}} &nbsp;&nbsp; 
+                <i class="fa fa-tag"></i>{{$discussion->channel->name}} &nbsp;&nbsp;
+                <i class="fa fa-comments"></i> {{ $discussion->replies->count()}} 
+            </div>
 
 
-            @endforeach
-        </ul>
+        </li>
 
-        <hr class="solid mb-none" />
-        <div class="pagination-wrapper col-md-offset-4">
-            {{$discussions->appends(['channel'=> request()->query('channel')])->links('pagination::bootstrap-4')}}
-            <!--pagination with query of filter  -->
-        </div>
+
+        @endforeach
+    </ul>
+
+    <hr class="solid mb-none" />
+    <div class="pagination-wrapper col-md-offset-4">
+        {{$discussions->appends(['channel'=> request()->query('channel')])->links('pagination::bootstrap-4')}}
+        <!--pagination with query of filter  -->
     </div>
 
 </div>
