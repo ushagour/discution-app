@@ -147,15 +147,11 @@
                     <!-- Authentication Links  -->
                     @guest
                     @if (Route::has('login'))
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
                     @endif
-
+                            <br>
                     @if (Route::has('register'))
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
                     @endif
                     @else
                     <a href="#" data-toggle="dropdown">
@@ -175,7 +171,7 @@
                         <ul class="list-unstyled">
                             <li class="divider"></li>
                             <li>
-                                <a role="menuitem" tabindex="-1" href="{{ route('user.profile') }}"><i
+                                <a role="menuitem" tabindex="-1" href="{{ route('user.index') }}"><i
                                         class="fa fa-user"></i> My Profile</a>
                             </li>
                             <li>

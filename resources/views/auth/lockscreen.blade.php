@@ -34,7 +34,7 @@
         integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-  
+
     <!-- Skin CSS -->
     <link rel="stylesheet" href="{{asset('assets/stylesheets/skins/default.css') }}" />
 
@@ -43,64 +43,66 @@
 
     <!-- Head Libs -->
     <script src="{{asset('assets/vendor/modernizr/modernizr.js')}}"></script>
-	</head>
+</head>
+
 <body>
-		<!-- start: page -->
-		<section class="body-sign body-locked">
-			<div class="center-sign">
-				<div class="panel panel-sign">
-					<div class="panel-body">
-           
+    <!-- start: page -->
+    <section class="body-sign body-locked">
+        <div class="center-sign">
+            <div class="panel panel-sign">
+                <div class="panel-body">
+
                     <form method="POST" action="{{ route('login.unlock') }}" aria-label="{{ __('Locked') }}">
                         @csrf
 
 
-            
-							<div class="current-user text-center">
-								<img src="assets/images/!logged-user.jpg" alt="John Doe" class="img-circle user-image" />
-								<h2 class="user-name text-dark m-none">{{Auth::user()->name}}</h2>
-								<p class="user-email m-none">{{Auth::user()->email}}</p>
-							</div>
-                            @if(count($errors)>0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+
+                        <div class="current-user text-center">
+                            <img src="assets/images/!logged-user.jpg" alt="John Doe" class="img-circle user-image" />
+                            <h2 class="user-name text-dark m-none">{{Auth::user()->name}}</h2>
+                            <p class="user-email m-none">{{Auth::user()->email}}</p>
+                        </div>
+                        @if(count($errors)>0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="form-group mb-lg">
+                            <div class="input-group input-group-icon">
+                                <input id="pwd" type="password" name="password" class="form-control input-lg"
+                                    placeholder="Password" />
+                                <span class="input-group-addon">
+                                    <span class="icon icon-lg">
+                                        <i class="fa fa-lock"></i>
+                                    </span>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <p class="mt-xs mb-none">
+                                    <!-- <a href="#">Not John Doe?</a> -->
+                                </p>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <button type="submit" class="btn btn-primary">Unlock</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        @endif
-							<div class="form-group mb-lg">
-								<div class="input-group input-group-icon">
-									<input id="pwd" type="password" name="password" class="form-control input-lg" placeholder="Password" />
-									<span class="input-group-addon">
-										<span class="icon icon-lg">
-											<i class="fa fa-lock"></i>
-										</span>
-									</span>
-            
-								</div>
-							</div>
+    </section>
+    <!-- end: page -->
 
-							<div class="row">
-								<div class="col-xs-6">
-									<p class="mt-xs mb-none">
-										<!-- <a href="#">Not John Doe?</a> -->
-									</p>
-								</div>
-								<div class="col-xs-6 text-right">
-									<button type="submit" class="btn btn-primary">Unlock</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- end: page -->
-
-	    <!-- Vendor -->
-        <script src="{{asset('assets/vendor/jquery/jquery.js')}}"></script>
+    <!-- Vendor -->
+    <script src="{{asset('assets/vendor/jquery/jquery.js')}}"></script>
     <script src="{{asset('assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
     <script src="{{asset('assets/vendor/nanoscroller/nanoscroller.js')}}"></script>
@@ -124,5 +126,6 @@
 
 
 
-	</body>
+</body>
+
 </html>
