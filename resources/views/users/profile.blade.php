@@ -51,8 +51,8 @@
 										<div class="widget-content-expanded">
 											<ul class="simple-todo-list">
 												<li class="@if(Auth::user()->avatar !=null) completed  @endif">Update Profile Picture</li>
-												<li class="@if(Auth::user()->name !=null) completed  @endif">Change Personal Information</li>
-												<li>Update Social Media</li>
+												<li class="@if(Auth::user()->name !=null) completed  @endif"> Personal Information</li>
+												<li class="@if(Auth::user()->profile->github !=null) completed  @endif">Update Social Media</li>
 												<li class="@if(Auth::user()->email_verified_at !=null) completed  @endif">Email Verified</li>
 											</ul>
 										</div>
@@ -66,9 +66,15 @@
 									<hr class="dotted short">
 
 									<div class="social-icons-list">
-										<a rel="tooltip" data-placement="bottom" target="_blank" href="http://www.facebook.com" data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
-										<a rel="tooltip" data-placement="bottom" href="http://www.twitter.com" data-original-title="Twitter"><i class="fa fa-twitter"></i><span>Twitter</span></a>
-										<a rel="tooltip" data-placement="bottom" href="http://www.linkedin.com" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+									@if(Auth::user()->profile->facebook !=null)
+										<a rel="tooltip" data-placement="bottom" target="_blank" href="{{Auth::user()->facebook}}" data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+									@endif
+									@if(Auth::user()->profile->github !=null)
+										<a rel="tooltip" data-placement="bottom" href="{{Auth::user()->github}}" data-original-title="github"><i class="fa fa-github"></i><span>Github</span></a>
+									@endif	
+									@if(Auth::user()->profile->linkdin !=null)
+										<a rel="tooltip" data-placement="bottom" href="{{Auth::user()->linkdin}}" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+									@endif
 									</div>
 
 								</div>
@@ -81,7 +87,6 @@
 										<a href="#" class="fa fa-caret-down"></a>
 										<a href="#" class="fa fa-times"></a>
 									</div>
-
 									<h2 class="panel-title">Popular Posts</h2>
 								</header>
 								<div class="panel-body">
@@ -188,8 +193,10 @@
 										</div>
 									</div>
 									<div id="edit" class="tab-pane">
+									<form class=""  action="{{url('user/update')}}"  role="form" enctype="multipart/form-data" method="POST">
+    {!! csrf_field() !!}
+     <input type="hidden" name="_method" value="PUT">
 
-										<form class="form-horizontal" method="get">
 											<h4 class="mb-xlg">Personal Information</h4>
 											<fieldset>
 												<div class="form-group">
@@ -208,12 +215,49 @@
 										
 											</fieldset>
 											<hr class="dotted tall">
+											<h4 class="mb-xlg">Social Media </h4>
+											<fieldset>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="facebook">facebook </label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" id="facebook" name="facebook" value="{{$auth_user->profile->facebook}}">
+													</div>
+												</div>
+
+									
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="google">google </label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" id="google" name="google" value="{{$auth_user->profile->google}}">
+													</div>
+												</div>
+
+									
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="github">github </label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" id="github" name="github" value="{{$auth_user->profile->github}}">
+													</div>
+												</div>
+
+									
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="linkdin">linkdin </label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" id="linkdin" name="linkdin" value="{{$auth_user->profile->linkdin}}">
+													</div>
+												</div>
+
+									
+										
+											</fieldset>
+											<hr class="dotted tall">
 											<h4 class="mb-xlg">About Yourself</h4>
 											<fieldset>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileBio">Biographical Info</label>
 													<div class="col-md-8">
-														<textarea class="form-control" rows="3"  name="about" id="profileBio"> {{$auth_user->about}}</textarea>
+														<textarea class="form-control" rows="3"  name="about" id="profileBio"> {{$auth_user->profile->about}}</textarea>
 													</div>
 												</div>
 												<div class="form-group">
@@ -232,7 +276,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileNewPassword">New Password</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" id="profileNewPassword">
+														<input type="text" class="form-control"  name="profileNewPassword" id="profileNewPassword">
 													</div>
 												</div>
 												<div class="form-group">

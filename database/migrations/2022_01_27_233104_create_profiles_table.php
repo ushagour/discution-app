@@ -14,15 +14,17 @@ class CreateProfilesTable extends Migration
     public function up()
     {
         Schema::create('profiles', function (Blueprint $table) {
+            $table->id();
             $table->string('avatar')->nullable();
             $table->text('role')->nullable();
+            $table->bigInteger('point')->default(50);
             $table->string('facebook')->nullable();
             $table->string('github')->nullable();
             $table->string('google')->nullable();
+            $table->string('linkdin')->nullable();
             $table->string('about')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');// ->onDelete('cascade') on delete cascade pour supprimer les lien entre table category and posts 
-            $table->string('active')->default(0);
             $table->timestamps();
         });
     }

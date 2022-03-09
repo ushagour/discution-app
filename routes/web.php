@@ -8,6 +8,7 @@ use App\Models\Discussion;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 /*
@@ -51,8 +52,9 @@ Route::post('channel/update',  [ChannelController::class,'update'])->name('chann
 Route::get('channel/destroy/{id}', [ChannelController::class,'destroy']); 
  Route::get('/channel', [App\Http\Controllers\ChannelController::class, 'index'])->name('channel.index');
 
-
- Route::get('user/profile',[UsersController::class,'profile'])->name('user.profile');
+ Route::resource('user',UsersController::class);
+ Route::put('user/update',[UsersController::class,'update'])->name('user.update');
+ 
  Route::get('/result',[App\Http\Controllers\HomeController::class,'Search'])->name('Search');
 
 
@@ -72,7 +74,7 @@ Route::get('/auth/github/callback', function () {
         return redirect('login');
     }
 
- 
+//  dd($SocialiteUser);
     $user = User::where('provider_id', $SocialiteUser->id)->first();
  
     if ($user) {
@@ -89,6 +91,13 @@ Route::get('/auth/github/callback', function () {
             'provider_id' => $SocialiteUser->id,
             'provider_token' => $SocialiteUser->token,
             'provider_refresh_token' => $SocialiteUser->refreshToken,
+        ]);
+
+        DB::table('profiles')->insert([
+            'avatar' => $SocialiteUser->avatar,
+            'github' => $SocialiteUser->user['html_url'],
+            'about' =>  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat, dignissimos quisquam molestiae consequuntur dicta eveniet voluptate incidunt quo ullam cupiditate, odit natus ducimus ad, aut totam deserunt illum repellendus? Quidem.',
+            'user_id' => $user->id,
         ]);
     }
     // dd($user);
