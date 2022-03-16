@@ -77,7 +77,7 @@
         <div class="text-muted">
             <img height="20px" width="20px" style="border-radius:50%;" src="{{ Gravatar::src($reply->owner->email) }}">
             <strong>{{$reply->owner->name}}</strong>
-            (<strong>{{$reply->owner->point}}</strong>)
+            (<strong>{{$reply->owner->profile->point}}</strong>)
 
         </div>
         <div class="panel-actions">

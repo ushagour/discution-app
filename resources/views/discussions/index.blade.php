@@ -50,7 +50,7 @@
 
                 <i class="fa fa-clock-o"></i> {{$discussion->created_at->diffForHumans()}} &nbsp;&nbsp;
                 <i class="fa fa-user"></i> By {{$discussion->author->name}} &nbsp;&nbsp; 
-                <i class="fa fa-tag"></i>{{$discussion->channel->name}} &nbsp;&nbsp;
+                <i class="fa fa-tag"></i> {{$discussion->channel->name}} &nbsp;&nbsp;
                 <i class="fa fa-comments"></i> {{ $discussion->replies->count()}} 
             </div>
 

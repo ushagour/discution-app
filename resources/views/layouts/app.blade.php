@@ -105,22 +105,23 @@
                             <div class="content">
                                 <ul>
                                     @foreach(auth()->user()->notifications()->get() as $notification)
-
-                                    @if($notification->type == 'App\Notifications\NewReplyAdded' &&
-                                    $notification->unread() )
+                                    <!-- $notification->type == 'App\Notifications\NewReplyAdded' -->
+                                    @if( $notification->unread() )
+                                    
+                                    
                                     <li>
-                                        <!-- //affichage dyal colum data  -->
-                                        <a href="{{route('discussions.show',$notification->data['discussion']['slug'])}}"
-                                            class="clearfix">
-                                            <div class="image">
-                                                <i class="fa fa-lock bg-bullhorn"></i>
-                                            </div>
-                                            <span class="title"> A new replay was added to your discussions
+											<a href="{{route('discussions.show',$notification->data['discussion']['slug'])}}" class="clearfix">
+												<!-- <figure class="image">
+													<img src="assets/images/!sample-user.jpg" alt="Joseph Junior" class="img-circle" />
+												</figure> -->
+                                                <span class="title"> A new replay was added to your discussions
                                                </span>
                                             <span class="message"> {{$notification->created_at->diffForHumans()}}
                                             </span>
-                                        </a>
-                                    </li>
+											</a>
+										</li>
+                                    
+  
                                     @endif
 
 
@@ -233,7 +234,9 @@
                                     <a href="{{route('discussions.index')}}">
                                         <i class="fa fa-home" aria-hidden="true"></i>
                                         <span>Discussions</span>
+
                                     </a>
+
                                 </li>
                                 <li>
                                     @auth
@@ -245,6 +248,7 @@
                                     <a href="{{route('channel.index')}}">
                                         <i class="fa fa-suitcase" aria-hidden="true"></i>
                                         <span> Channels </span>
+                                        
                                     </a>
                                
 
@@ -288,10 +292,10 @@
                         <hr class="separator" />
 
                     </div>
-
-            </aside>
+    
+                </aside>
             <!-- end: sidebar -->
-            
+
             
             <section role="main" class="content-body">
                 @yield('header')
@@ -313,59 +317,27 @@
 
                     <div class="sidebar-right-wrapper">
 
-                        <div class="sidebar-widget widget-calendar">
-                            <h6>Upcoming Tasks</h6>
-                            <div data-plugin-datepicker data-plugin-skin="dark"></div>
-
-                            <ul>
-                                <li>
-                                    <time datetime="2014-04-19T00:00+00:00">04/19/2014</time>
-                                    <span>Company Meeting</span>
-                                </li>
-                            </ul>
-                        </div>
-
+                   
+                            <section class="panel">
+									<header class="panel-heading bg-dark">
+										<div class="panel-heading-icon">
+											<i class="fa fa-user"></i>
+										</div>
+									</header>
+									<div class="panel-body text-center">
+										<h3 class="text-semibold mt-sm text-center">JOIN OUR COMMUNITY</h3>
+										<p class="text-center">Create your  account now 
+                                        <a href="{{ route('register') }}" 
+                                         class="mb-xs mt-xs mr-xs btn btn-dark "> Regestre </a>
+                                        </p>
+									</div>
+								</section>
+                                @auth
+                                
                         <div class="sidebar-widget widget-friends">
-                            <h6>Friends</h6>
-                            <ul>
-                                <li class="status-online">
-                                    <figure class="profile-picture">
-                                        <img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-                                    </figure>
-                                    <div class="profile-info">
-                                        <span class="name">Joseph Doe Junior</span>
-                                        <span class="title">Hey, how are you?</span>
-                                    </div>
-                                </li>
-                                <li class="status-online">
-                                    <figure class="profile-picture">
-                                        <img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-                                    </figure>
-                                    <div class="profile-info">
-                                        <span class="name">Joseph Doe Junior</span>
-                                        <span class="title">Hey, how are you?</span>
-                                    </div>
-                                </li>
-                                <li class="status-offline">
-                                    <figure class="profile-picture">
-                                        <img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-                                    </figure>
-                                    <div class="profile-info">
-                                        <span class="name">Joseph Doe Junior</span>
-                                        <span class="title">Hey, how are you?</span>
-                                    </div>
-                                </li>
-                                <li class="status-offline">
-                                    <figure class="profile-picture">
-                                        <img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-                                    </figure>
-                                    <div class="profile-info">
-                                        <span class="name">Joseph Doe Junior</span>
-                                        <span class="title">Hey, how are you?</span>
-                                    </div>
-                                </li>
-                            </ul>
+                            <h6>TOP users</h6>
                         </div>
+                        @endauth
 
                     </div>
                 </div>

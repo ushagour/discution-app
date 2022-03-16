@@ -33,7 +33,7 @@ class DiscussionController extends Controller
 
 
     
-    return view('discussions.index')->with(['discussions'=>Discussion::filterByChannels()->paginate(3),'title_page'=>'Discussions']); 
+    return view('discussions.index')->with(['discussions'=>Discussion::filterByChannels()->latest()->paginate(6),'title_page'=>'Discussions']); 
     
     }
 

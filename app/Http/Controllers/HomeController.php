@@ -47,7 +47,9 @@ class HomeController extends Controller
     public function Search()
     {
 
-     $discussion =Discussion:: where('title','like','%'.request('query').'%')->paginate(4);
+     $discussion =Discussion:: where('title','like','%'.request('query').'%')
+                                ->orWhere('content', 'LIKE', '%'.request('query').'%') 
+                                ->paginate(4);
 //ToDO hta nziid l3iiba dyal appercase 3la hssab recherch 
     //  dd($discussion);
      return view('discussions.search')->with('query',request('query'))

@@ -46,10 +46,10 @@ class RepliesController extends Controller
             'content'=>$request->content,
             'discussion_id'=>$discussion->id
 
-        ]);
+        ]); 
 
-        auth()->user()->point +=25;
-        auth()->user()->save();
+        auth()->user()->profile->point +=25;
+        auth()->user()->profile->save();
 
         $discussion->author->notify( New NewReplyAdded($discussion)); //melii y tcriya chii replya nsiifto msg l autor dyal discussion 
 

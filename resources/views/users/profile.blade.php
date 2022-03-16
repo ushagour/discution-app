@@ -67,13 +67,16 @@
 
 									<div class="social-icons-list">
 									@if(Auth::user()->profile->facebook !=null)
-										<a rel="tooltip" data-placement="bottom" target="_blank" href="{{Auth::user()->facebook}}" data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+										<a rel="tooltip" data-placement="bottom" target="_blank" href="{{Auth::user()->profile->facebook}}" target="_blank"   data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
 									@endif
 									@if(Auth::user()->profile->github !=null)
-										<a rel="tooltip" data-placement="bottom" href="{{Auth::user()->github}}" data-original-title="github"><i class="fa fa-github"></i><span>Github</span></a>
+										<a rel="tooltip" data-placement="bottom" href="{{Auth::user()->profile->github}}"  target="_blank"  data-original-title="github"><i class="fa fa-github"></i><span>Github</span></a>
 									@endif	
 									@if(Auth::user()->profile->linkdin !=null)
-										<a rel="tooltip" data-placement="bottom" href="{{Auth::user()->linkdin}}" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+										<a rel="tooltip" data-placement="bottom" href="{{Auth::user()->profile->linkdin}}" target="_blank" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+									@endif
+									@if(Auth::user()->profile->google !=null)
+										<a rel="tooltip" data-placement="bottom" href="{{Auth::user()->profile->google}}" target="_blank" data-original-title="google"><i class="fa fa-google"></i><span>Google</span></a>
 									@endif
 									</div>
 
