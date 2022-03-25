@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             ChannelSeeder::class
         
         ]);
-        User::factory(3)->create();
+        // User::factory(3)->create();
         Discussion::factory(3)->create();
     }
 }

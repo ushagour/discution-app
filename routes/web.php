@@ -40,11 +40,16 @@ Route::get('users/notifications',[UsersController::class,'notifications'])->name
 Route::get('reply/like/{id}',[RepliesController::class,'like'])->name('reply.like');
 Route::get('reply/unlike/{id}',[RepliesController::class,'unlike'])->name('reply.unlike');
 
-// Route ::get('test', function (){
-// //    echo request()->query('channel');
+Route ::get('test', function (){
+//    echo request()->query('channel');
 // return view('welcome');
 
-// });
+
+
+foreach (User::all() as $user ) {
+    echo($user->profile->point.'</br>');
+}
+});
 
 # Channels resource 
 Route::resource('channel',ChannelController::class);
@@ -54,7 +59,7 @@ Route::get('channel/destroy/{id}', [ChannelController::class,'destroy']);
 
  Route::resource('user',UsersController::class);
  Route::put('user/update',[UsersController::class,'update'])->name('user.update');
- 
+ Route::get('/user/toggle/{id}/{state}', [UsersController::class,'toggle'])->name('users.toggle');  
  Route::get('/result',[App\Http\Controllers\HomeController::class,'Search'])->name('Search');
 
 
@@ -74,7 +79,7 @@ Route::get('/auth/github/callback', function () {
         return redirect('login');
     }
 
-//  dd($SocialiteUser);
+//   dd($SocialiteUser);
     $user = User::where('provider_id', $SocialiteUser->id)->first();
  
     if ($user) {
@@ -100,7 +105,7 @@ Route::get('/auth/github/callback', function () {
             'user_id' => $user->id,
         ]);
     }
-    // dd($user);
+    //  dd($user);
  
     Auth::login($user);
  

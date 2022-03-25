@@ -46,8 +46,16 @@
                 href="{{route('discussions.edit',['discussion'=>$discussion->slug])}}" role="button"></a>
         </div>
         @endauth
-        <h2 class="panel-title"> <img height="40px" width="40px" style="border-radius:50%;"
-                src="{{ Gravatar::src($discussion->author->email) }}"> <strong>{{$discussion->author->name}}</strong>
+        <h2 class="panel-title">
+        @if($discussion->author->profile->avatar)
+                            <img src="{{$discussion->author->profile->avatar}}" alt="{{$discussion->author->name}}"
+                            height="40px" width="40px"style="border-radius:50%;"	 data-lock-picture="src={{$discussion->BestReply->owner->profile->avatar}}" />
+                                @else
+                                <img src="{{ Gravatar::src($discussion->author->email) }}" alt="{{$discussion->author->name}}"
+                                height="40px" width="40px" style="border-radius:50%;" data-lock-picture="src={{ Gravatar::src($discussion->author->email) }}" />
+                                @endif
+
+ <strong>{{$discussion->author->name}}</strong>
         </h2>
         <p class="panel-subtitle"> <small>{{$discussion->created_at->diffForHumans()}}</small></p>
     </header>
@@ -58,8 +66,15 @@
         BEST REPLY
 
         <blockquote class="b-thin success">
-            <img height="20px" width="20px" style="border-radius:50%;"
-                src="{{Gravatar::src( $discussion->BestReply->owner->email)}}" alt="">
+   
+                @if($discussion->BestReply->owner->profile->avatar)
+                            <img src="{{$discussion->BestReply->owner->profile->avatar}}" alt="{{$discussion->BestReply->owner->name}}"
+                            height="20px" width="20px" style="border-radius:50%;"	 data-lock-picture="src={{$discussion->BestReply->owner->profile->avatar}}" />
+                                @else
+                                <img src="{{ Gravatar::src($discussion->BestReply->owner->email) }}" alt="{{$discussion->BestReply->owner->name}}"
+                                height="20px" width="20px" style="border-radius:50%;" data-lock-picture="src={{ Gravatar::src($discussion->BestReply->owner->email) }}" />
+                                @endif
+
             <p>{!!$discussion->BestReply->content!!}</p>
             <small>{{$discussion->BestReply->owner->name}}, <cite
                     title="{{$discussion->BestReply->owner->email}}"></cite></small>
@@ -75,7 +90,13 @@
 <div class="panel panel-dark ">
     <header class="panel-heading">
         <div class="text-muted">
-            <img height="20px" width="20px" style="border-radius:50%;" src="{{ Gravatar::src($reply->owner->email) }}">
+        @if($reply->owner->profile->avatar)
+                            <img src="{{$reply->owner->profile->avatar}}" alt="{{$reply->owner->name}}"
+                            height="40px" width="40px" style="border-radius:50%;"	 data-lock-picture="src={{$reply->owner->profile->avatar}}" />
+                                @else
+                                <img src="{{ Gravatar::src($reply->owner->email) }}" alt="{{$reply->owner->name}}"
+                                height="20px" width="20px" style="border-radius:50%;" data-lock-picture="src={{ Gravatar::src($reply->owner->email) }}" />
+                                @endif
             <strong>{{$reply->owner->name}}</strong>
             (<strong>{{$reply->owner->profile->point}}</strong>)
 

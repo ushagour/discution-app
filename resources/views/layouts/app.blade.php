@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- SCRIPTS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>   
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -34,8 +34,8 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{asset('assets/stylesheets/theme.css')}}" />
-      <!-- Specific Page Vendor CSS -->
-  <link rel="stylesheet" href="{{asset('assets/vendor/pnotify/pnotify.custom.css')}}" />
+    <!-- Specific Page Vendor CSS -->
+    <link rel="stylesheet" href="{{asset('assets/vendor/pnotify/pnotify.custom.css')}}" />
 
 
     <!-- toastr -->
@@ -49,7 +49,7 @@
 
     <!-- Head Libs -->
     <script src="{{asset('assets/vendor/modernizr/modernizr.js')}}"></script>
-    
+
 
 
 
@@ -62,11 +62,11 @@
         <header class="header">
             <div class="logo-container">
                 <a href="../" class="logo">
-                <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html"
-                    data-fire-event="sidebar-left-opened">
-                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-                </div>
-</a>
+                    <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened"
+                        data-target="html" data-fire-event="sidebar-left-opened">
+                        <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                    </div>
+                </a>
             </div>
 
             <!-- start: search & user box -->
@@ -74,14 +74,14 @@
 
 
 
-                 <form class="search nav-form" method="GET" action="{{route('Search')}}">
+                <form class="search nav-form" method="GET" action="{{route('Search')}}">
                     <div class="input-group input-search">
-                        <input type="text" class="form-control" name="query"  placeholder="Search...">
+                        <input type="text" class="form-control" name="query" placeholder="Search...">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
-                </form> 
+                </form>
 
                 <span class="separator"></span>
 
@@ -107,21 +107,22 @@
                                     @foreach(auth()->user()->notifications()->get() as $notification)
                                     <!-- $notification->type == 'App\Notifications\NewReplyAdded' -->
                                     @if( $notification->unread() )
-                                    
-                                    
+
+
                                     <li>
-											<a href="{{route('discussions.show',$notification->data['discussion']['slug'])}}" class="clearfix">
-												<!-- <figure class="image">
+                                        <a href="{{route('discussions.show',$notification->data['discussion']['slug'])}}"
+                                            class="clearfix">
+                                            <!-- <figure class="image">
 													<img src="assets/images/!sample-user.jpg" alt="Joseph Junior" class="img-circle" />
 												</figure> -->
-                                                <span class="title"> A new replay was added to your discussions
-                                               </span>
+                                            <span class="title"> A new replay was added to your discussions
+                                            </span>
                                             <span class="message"> {{$notification->created_at->diffForHumans()}}
                                             </span>
-											</a>
-										</li>
-                                    
-  
+                                        </a>
+                                    </li>
+
+
                                     @endif
 
 
@@ -148,19 +149,25 @@
                     <!-- Authentication Links  -->
                     @guest
                     @if (Route::has('login'))
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     @endif
-                            <br>
+                    <br>
                     @if (Route::has('register'))
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                     @else
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img  src="{{ Gravatar::src(Auth::user()->email) }}" alt="{{Auth::user()->name}}" class="img-circle"
-                                data-lock-picture="src={{ Gravatar::src(Auth::user()->email) }}" />
+                            @if(Auth::user()->profile->avatar)
+                            <img src="{{Auth::user()->profile->avatar}}" alt="{{Auth::user()->name}}"
+                                class="img-circle" data-lock-picture="src={{Auth::user()->profile->avatar}}" />
+                                @else
+                                <img src="{{ Gravatar::src(Auth::user()->email) }}" alt="{{Auth::user()->name}}"
+                                class="img-circle" data-lock-picture="src={{ Gravatar::src(Auth::user()->email) }}" />
+                                @endif
                         </figure>
-                        <div class="profile-info" data-lock-name="{{Auth::user()->name}}" data-lock-email="{{Auth::user()->email}}">
+                        <div class="profile-info" data-lock-name="{{Auth::user()->name}}"
+                            data-lock-email="{{Auth::user()->email}}">
                             <span class="name"> {{ Auth::user()->name }}</span>
                             <span class="role">administrator</span>
                         </div>
@@ -172,7 +179,7 @@
                         <ul class="list-unstyled">
                             <li class="divider"></li>
                             <li>
-                                <a role="menuitem" tabindex="-1" href="{{ route('user.index') }}"><i
+                                <a role="menuitem" tabindex="-1" href="{{ route('user.show',['user'=>Auth::user()]) }}"><i
                                         class="fa fa-user"></i> My Profile</a>
                             </li>
                             <li>
@@ -180,14 +187,14 @@
                                         class="fa  fa-inbox"></i> My discussions</a>
                             </li>
 
-                    
+
 
                             <li>
-                                <a role="menuitem" tabindex="-1" href="{{route('lockscreen')}}" ><i
+                                <a role="menuitem" tabindex="-1" href="{{route('lockscreen')}}"><i
                                         class="fa fa-lock"></i> Lock Screen</a>
                             </li>
                             <li>
-                                <a role="menuitem" class="dropdown-item"  onclick="event.preventDefault();
+                                <a role="menuitem" class="dropdown-item" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
@@ -244,13 +251,18 @@
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         <span>create discussions</span>
                                     </a>
-                               
+
                                     <a href="{{route('channel.index')}}">
                                         <i class="fa fa-suitcase" aria-hidden="true"></i>
                                         <span> Channels </span>
-                                        
+
                                     </a>
-                               
+                                    <a href="{{route('user.index')}}">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <span> Users Manage </span>
+
+                                    </a>
+
 
 
                                     @else
@@ -292,14 +304,14 @@
                         <hr class="separator" />
 
                     </div>
-    
-                </aside>
+
+            </aside>
             <!-- end: sidebar -->
 
-            
+
             <section role="main" class="content-body">
                 @yield('header')
-         
+
                 @yield('content')
 
                 <!-- start: page -->
@@ -317,77 +329,95 @@
 
                     <div class="sidebar-right-wrapper">
 
-                   
-                            <section class="panel">
-									<header class="panel-heading bg-dark">
-										<div class="panel-heading-icon">
-											<i class="fa fa-user"></i>
-										</div>
-									</header>
-									<div class="panel-body text-center">
-										<h3 class="text-semibold mt-sm text-center">JOIN OUR COMMUNITY</h3>
-										<p class="text-center">Create your  account now 
-                                        <a href="{{ route('register') }}" 
-                                         class="mb-xs mt-xs mr-xs btn btn-dark "> Regestre </a>
-                                        </p>
-									</div>
-								</section>
-                                @auth
-                                
-                        <div class="sidebar-widget widget-friends">
-                            <h6>TOP users</h6>
-                        </div>
-                        @endauth
+                        @guest
+                        <!-- // The user is not authenticated...s -->
+                        <section class="panel">
+                            <header class="panel-heading bg-dark">
+                                <div class="panel-heading-icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                            </header>
+                            <div class="panel-body text-center">
+                                <h3 class="text-semibold mt-sm text-center">JOIN OUR COMMUNITY</h3>
+                                <p class="text-center">Create your account now
+                                    <a href="{{ route('register') }}" class="mb-xs mt-xs mr-xs btn btn-dark "> Regestre
+                                    </a>
+                                </p>
+                            </div>
+                        </section>
+                        @endguest
 
+                        
+                        <div class="sidebar-widget widget-friends">
+								<h6>Friends</h6>
+                                <ul class="simple-user-list">
+                                            @foreach(App\Models\User::all()  as $topuser)
+                                                @if($topuser->profile->point >= 100)
+                                                <li>
+												<figure class="image rounded">
+													<img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle">
+												</figure>
+												<span class="title">Joseph Doe Junior</span>
+												<span class="message truncate">Lorem ipsum dolor sit.</span>
+											</li>
+                                                @endif
+                                            @endforeach
+								</ul>
+							</div>
+
+
+                     
+                               
                     </div>
                 </div>
             </div>
         </aside>
     </section>
-    </body>
+</body>
 
-    <!-- Vendor -->
-    <script src="{{asset('assets/vendor/jquery/jquery.js')}}"></script>
-    @yield("more_js")
+<!-- Vendor -->
+<script src="{{asset('assets/vendor/jquery/jquery.js')}}"></script>
+@yield("more_js")
 
-    <script src="{{asset('assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
-    <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
-    <script src="{{asset('assets/vendor/nanoscroller/nanoscroller.js')}}"></script>
-    <script src="{{asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
-    <script src="{{asset('assets/vendor/magnific-popup/magnific-popup.js')}}"></script>
-    <script src="{{asset('assets/vendor/jquery-placeholder/jquery.placeholder.js')}}"></script>
-	<!-- Specific Page Vendor -->
-    <script src="{{asset('assets/vendor/pnotify/pnotify.custom.js')}}"></script>
-
-    
-    <!-- Theme Base, Components and Settings -->
-    <script src="{{asset('assets/javascripts/theme.js')}}"></script>
-    
-    <!-- Theme Custom -->
-    <script src="{{asset('assets/javascripts/theme.custom.js')}}"></script>
-    
-    <!-- Theme Initialization Files -->
-    <script src="{{asset('assets/javascripts/theme.init.js')}}"></script>
-    <!-- Notifications -->
-    <script src="{{asset('assets/javascripts/ui-elements/examples.notifications.js')}}"></script>
+<script src="{{asset('assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
+<script src="{{asset('assets/vendor/nanoscroller/nanoscroller.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('assets/vendor/magnific-popup/magnific-popup.js')}}"></script>
+<script src="{{asset('assets/vendor/jquery-placeholder/jquery.placeholder.js')}}"></script>
+<!-- Specific Page Vendor -->
+<script src="{{asset('assets/vendor/pnotify/pnotify.custom.js')}}"></script>
 
 
+<!-- Theme Base, Components and Settings -->
+<script src="{{asset('assets/javascripts/theme.js')}}"></script>
+
+<!-- Theme Custom -->
+<script src="{{asset('assets/javascripts/theme.custom.js')}}"></script>
+
+<!-- Theme Initialization Files -->
+<script src="{{asset('assets/javascripts/theme.init.js')}}"></script>
+<!-- Notifications -->
+<script src="{{asset('assets/javascripts/ui-elements/examples.notifications.js')}}"></script>
 
 
 
-    <script>
- 
-          @if (Session::has('toaster-message'))
-            new PNotify({
-			title: '{{ Session::get('toaster-message') }}',
-			text: 'Check me out! I\'m a notice.',
-			type: 'custom',
-			addclass: '{{ Session::get('toaster-class') }}',
-			icon: 'fa fa-twitter'
-		});
+
+
+<script>
+    @if(Session::has('toaster-message'))
+    new PNotify({
+        title: '{{ Session::get('
+        toaster - message ') }}',
+        text: 'Check me out! I\'m a notice.',
+        type: 'custom',
+        addclass: '{{ Session::get('
+        toaster - class ') }}',
+        icon: 'fa fa-twitter'
+    });
     @endif
-    
-    </script>
+
+</script>
 
 
 

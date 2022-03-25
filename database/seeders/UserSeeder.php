@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
 
 
           DB::table('profiles')->insert([
-            'avatar' => 'avatars/defult_user.png',
+            'avatar' => null,
             'about' =>  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat, dignissimos quisquam molestiae consequuntur dicta eveniet voluptate incidunt quo ullam cupiditate, odit natus ducimus ad, aut totam deserunt illum repellendus? Quidem.',
             'user_id' => $user->id,
         ]);

@@ -38,8 +38,13 @@
 
              
                     <div class="result-thumb">
-                        <img height="40px" width="40px" style="border-radius:50%;"
-                            src="{{ Gravatar::src($discussion->author->email) }}">
+                    @if($discussion->author->profile->avatar)
+                            <img src="{{$discussion->author->profile->avatar}}" alt="{{$discussion->author->name}}"
+                            height="40px" width="40px" style="border-radius:50%;"	 data-lock-picture="src={{$discussion->author->profile->avatar}}" />
+                                @else
+                                <img src="{{ Gravatar::src($discussion->author->email) }}" alt="{{$discussion->author->name}}"
+                                height="40px" width="40px" style="border-radius:50%;" data-lock-picture="src={{ Gravatar::src($discussion->author->email) }}" />
+                                @endif
                     </div>
                     <div class="result-data">
                     <p class="h3 title text-primary">{{$discussion->title}}</p>

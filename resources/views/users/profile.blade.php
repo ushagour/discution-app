@@ -29,7 +29,13 @@
 							<section class="panel">
 								<div class="panel-body">
 									<div class="thumb-info mb-md">
-										<img   src="{{ Gravatar::src(Auth::user()->email) }}" class="rounded img-responsive" alt="John Doe">
+                            @if(Auth::user()->profile->avatar)
+                            <img src="{{Auth::user()->profile->avatar}}" alt="{{Auth::user()->name}}"
+							class="rounded img-responsive"  data-lock-picture="src={{Auth::user()->profile->avatar}}" />
+                                @else
+                                <img src="{{ Gravatar::src(Auth::user()->email) }}" alt="{{Auth::user()->name}}"
+                                class="rounded img-responsive"  data-lock-picture="src={{ Gravatar::src(Auth::user()->email) }}" />
+                                @endif
 										<div class="thumb-info-title">
 											<span class="thumb-info-inner">{{ Auth::user()->name }}</span>
 											<span class="thumb-info-type">CEO</span>
@@ -50,7 +56,7 @@
 										</div>
 										<div class="widget-content-expanded">
 											<ul class="simple-todo-list">
-												<li class="@if(Auth::user()->avatar !=null) completed  @endif">Update Profile Picture</li>
+												<li class="@if(Auth::user()->profile->avatar !=null) completed  @endif">Update Profile Picture</li>
 												<li class="@if(Auth::user()->name !=null) completed  @endif"> Personal Information</li>
 												<li class="@if(Auth::user()->profile->github !=null) completed  @endif">Update Social Media</li>
 												<li class="@if(Auth::user()->email_verified_at !=null) completed  @endif">Email Verified</li>
