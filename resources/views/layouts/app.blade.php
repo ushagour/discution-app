@@ -85,6 +85,7 @@
 
                 <span class="separator"></span>
 
+                <span>{{$countryCode}}</span>
                 @auth
                 <ul class="notifications">
                     <li>

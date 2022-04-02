@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Channel;
 use App\Models\Discussion;
 use Auth;
+use Illuminate\Support\Facades\Http;
+
 
 
 class HomeController extends Controller
@@ -40,8 +42,23 @@ class HomeController extends Controller
         
 
 
+        $response =Http::get('https://freegeoip.app/json/');
 
-        return view('discussions.index',['discussions'=>$result,'title_page'=>'AskMe']);
+
+        if ($response->status() !== 200) {
+           return 'err';
+       }
+       
+       $countryCode = $response->json('country_code', 'US');
+       
+       if (empty($countryCode)) {
+           return 'err';
+       }
+       
+    
+       
+
+        return view('discussions.index',['discussions'=>$result,'title_page'=>'AskMe',"countryCode"=>$countryCode]);
 
     }
     public function Search()

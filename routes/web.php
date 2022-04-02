@@ -45,10 +45,9 @@ Route ::get('test', function (){
 // return view('welcome');
 
 
-
-foreach (User::all() as $user ) {
-    echo($user->profile->point.'</br>');
-}
+// foreach (User::all() as $user ) {
+//     echo($user->profile->point.'</br>');
+// }
 });
 
 # Channels resource 
