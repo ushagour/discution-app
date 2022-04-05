@@ -60,6 +60,8 @@
                         <td>{{$user->name}} </td>
                         <td>
 
+                        
+                        @can('remove-permission')
                             @if(!$user->is_admin)
                             <a href="{{route('users.toggle',['id'=>$user->id,'state'=>$user->is_admin])}}"
                                 class="btn btn-sm btn-success">make it admin </a>
@@ -67,7 +69,7 @@
                             <a href="{{route('users.toggle',['id'=>$user->id,'state'=>$user->is_admin])}}"
                                 class="btn btn-sm btn-danger"> remove permetion </a>
                             @endif
-
+                        @endcan
 
 
 
