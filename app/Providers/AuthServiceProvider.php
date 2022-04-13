@@ -18,7 +18,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Discussion' => 'App\Policies\DiscussionPolicy',
+        // Discussion::class => DiscussionPolicy::class,
+
     ];
 
     /**
@@ -30,10 +32,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('update-discussion', function (User $user, Discussion $discussion) {
-            return $user->id === $discussion->user_id ? Response::allow()
-            : Response::deny('You must be an administrator.');
-        });
+        // Gate::define('update-discussion', function (User $user, Discussion $discussion) {
+        //     return $user->id === $discussion->user_id ? Response::allow()
+        //     : Response::deny('You must be an administrator.');
+        // });
 
 
       // permition to make replay as best replay for the manager 
@@ -44,6 +46,10 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('remove-permission',function(User $user){ return $user->is_admin; });
+
+
+        //check if the user has the permission to see the delet and update buttons 
+        Gate::define('is-admin',function(User $user){ return $user->profile->role == 'admin'; });
     }
 
 

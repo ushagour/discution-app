@@ -45,9 +45,13 @@
      </div>
      <br />
      <div align="right">
-         <!-- Button trigger modal -->
-      <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Create Record</button>
-     </div>
+         <!-- check if the user has the permission to see the delet and update buttons  -->
+        
+        @can('is-admin')  
+
+         <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Create Record</button>
+            @endcan
+    </div>
      <br />
    <div class="table-responsive">
   

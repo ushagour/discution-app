@@ -8,6 +8,7 @@ use Validator;
 use App\Models\Channel;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Gate;
 
 
 
@@ -31,14 +32,36 @@ class ChannelController extends Controller
      */
     public function index(Request $request)
     {
+        // $this->authorize('viewAny',Channel::class);
+
         if($request->ajax())
         {
             $data = Channel::latest()->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-                        $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                      
+                        /*
+                        check if the user has the permission to see the delet and update buttons 
+                         if the responce true return the buttons
+                        */
+                        $response = Gate::inspect('is-admin');
+
+ 
+                        if ($response->allowed()) {
+                            // The action is authorized...
+                            $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                            $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                            
+                        } else {
+                            $button = $response->message();
+                        }
+                    
+                        
+                        
+                        
                         return $button;
+
+
                     })
                     ->rawColumns(['action'])
                     ->make(true);
@@ -64,6 +87,8 @@ class ChannelController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('store',Channel::class);
+        
         $rules = array(
             'name'    =>  'required',
         );
@@ -119,6 +144,8 @@ class ChannelController extends Controller
      */
     public function update(Request $request)
     {
+     
+        
         $rules = array(
             'name'         =>  'required'
         );
@@ -148,6 +175,8 @@ class ChannelController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Channel::class);
+
         $data = Channel::findOrFail($id);
         $data->delete();
     }

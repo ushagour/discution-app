@@ -12,6 +12,8 @@ use App\Notifications\ReplyMarkedAsBestReply;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use Illuminate\Support\Facades\Gate;
+
 use Illuminate\Validation\ValidationException;
 class DiscussionController extends Controller
 {
@@ -45,6 +47,7 @@ class DiscussionController extends Controller
     public function create()
     {
         //
+        // $this->authorize('create',Discussion::class);
 
         return view('discussions.create')->with(['channels',Channel::all(),'title_page'=>'Discussions']);
     }
@@ -118,30 +121,44 @@ class DiscussionController extends Controller
      */
     public function update(Request $request, Discussion $discussion)
     {
-        // $discussion =Discussion::find($id);
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',//|unique:posts todo see what happen
-            'content' => 'required',
-            'channel_id' => 'required',
-        ]);
+
+        /* gate to check if a user hasthe the permission to update  discussion (userèid = user -> id ) */
+        // if (! Gate::allows('update-discussion', $discussion)) {
+        //     abort(403);
+        // }
+        $response = Gate::inspect('update', $discussion);
+ 
+if ($response->allowed()) {
+    // The action is authorized...
+       // $discussion =Discussion::find($id);
+       $validatedData = $request->validate([
+        'title' => 'required|max:255',//|unique:posts todo see what happen
+        'content' => 'required',
+        'channel_id' => 'required',
+    ]);
 
 
-       $discussion->title = $request->title;
-       $discussion->content = $request->content;
-       $discussion->channel_id = $request->channel_id;  
-       $discussion->slug = str::slug($request->title);
-       $discussion->user_id = Auth::id();
-       
-  
+        $discussion->title = $request->title;
+        $discussion->content = $request->content;
+        $discussion->channel_id = $request->channel_id;
+        $discussion->slug = str::slug($request->title);
+        $discussion->user_id = Auth::id();
+   
 
 
-       $discussion->save();
 
-       Session::flash('toaster-message', 'discussion updated succesfuly!'); 
-       Session::flash('toaster-class', 'info'); 
-       
-         return redirect()->route('discussions.index')
-         ->with(['notifications'=>auth()->user()->notifications()->get()]); 
+        $discussion->save();
+
+        Session::flash('toaster-message', 'discussion updated succesfuly!');
+        Session::flash('toaster-class', 'info');
+   
+        return redirect()->route('discussions.index')
+     ->with(['notifications'=>auth()->user()->notifications()->get()]);
+    
+} else {
+    echo $response->message();
+}
+         
     }
 
     /**
@@ -164,9 +181,7 @@ class DiscussionController extends Controller
      */
     public function BestReply(Discussion $discussion,Reply $reply)
     {
-        //
-
-        // echo'ali';
+    
         $discussion->MarkAsBest($reply); //hena object dyal discussion howa lii feh wahd function Mark s best reply kanssiftoo lih en parametre object reply 
        
        
